@@ -13,10 +13,11 @@
         <header>
             <div class="nav-bar">
                 <div class="nav-bar-content">
-                    <h1><button href="">Buffet</button></h1>
-                    <h1><button href="">Menu</button></h1>
-                    <h1><button href="">Galleri</button></h1>
-                    <h1><button href="">Kontakt os</button></h1>
+                    <h1><button class="scroll-button" data-target="section2">Hvem er vi?</button></h1>
+                    <h1><button class="scroll-button" data-target="section3">Menu</button></h1>
+                    <h1><button class="scroll-button" data-target="section4">Buffet</button></h1>
+                    <h1><button class="scroll-button" data-target="section5">?</button></h1>
+                    
                 </div>
             </div>
         </header>
@@ -24,44 +25,49 @@
             <div class="content-box">
                 <h1>Vecchia Maniera</h1>
                 <div class="link-div">
-                    <button href="">Se menu</button>
-                    <button href="">Buffet</button>
+                    <button class="scroll-button" data-target="section3">Se menu</button>
+                    <button class="scroll-button" data-target="section4">Buffet</button>
                 </div>
             </div>
         </section>
 
-        <section class="section2">
+        <section class="section2" id="section2">
             <div class="boxes-container">
                 <div class="box box1">
                     <div class="boxtitle">
-                        <h1>Anti Pasti</h1>
+                        <h1>Hvem er vi?</h1>
                     </div>
+                    
+                    <div class="slide"></div>
                 </div>
                 <div class="box box2">
                     <div class="boxtitle">
-                        <h1>Pasta</h1>
+                        <h1>Bestil catering</h1>
                     </div>
                 </div>
-                <div class="box box1">
-                    <div class="boxtitle">
-                        <h1>Pizze</h1>
-                    </div>
-                </div>
-                <div class="box box2">
-                    <div class="boxtitle">
-                        <h1>Sandwich</h1>
-                    </div>
-                </div>
-                <div class="box box1">
-                    <div class="boxtitle">
-                        <h1>Dessert</h1>
-                    </div>
+            </div>
+        </section>
+
+        <section class="section3" id="section3">
+            <div class="content-box">
+                <h1>Menu</h1>
+                <div class="menuBox">
+                    <div class="menu-antipasti"></div>
+                    <div class="menu-pasta"></div>
+                    <div class="menu-pizze"></div>
+                    <div class="menu-antipasti"></div>
+                    <div class="menu-dessert"></div>
                 </div>
             </div>
         </section>
         
+        <section class="section4" id="section4">
+            <div class="content-box">
+                <h1>Catering</h1>
+            </div>
+        </section>
 
-        <section class="section3">
+        <section class="section5" id="section5">
             <div class="content-box">
                 <h1>Om os</h1>
                 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem error eius, repellat repudiandae, molestiae sapiente consectetur minima earum perspiciatis possimus nam ratione tenetur illo fuga a, enim provident ipsa iste?</p>
@@ -72,11 +78,7 @@
         </section>
     </div>
 
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            // Add a class to trigger the transition effect after the page is loaded
-            document.querySelector(".section1").classList.add("loaded");
-        });
-    </script>
+    <script src="script.js">
+</script>
 </body>
 </html>

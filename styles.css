@@ -19,6 +19,7 @@ body {
 .container {
     height: 100vh;
     overflow-y: scroll;
+    overflow-x: hidden;
     scroll-snap-type: y mandatory;
     scrollbar-width: thin; /* for Firefox */
     -webkit-scrollbar-width: thin; /* for Webkit based browsers */
@@ -92,8 +93,8 @@ section {
 }
 
 .section1.loaded {
-    background-color: rgb(79,148,241);
-    background-image: url("https://media1.giphy.com/media/YN7Xm4gQ54rRbC5Se5/giphy.gif");
+    background-color: rgb(102,51,255);
+    background-image: url("https://media4.giphy.com/media/1pqlCWXB0Q18SuCju7/giphy.gif");
     background-size: auto 100%;
     background-position: center;
     background-repeat: no-repeat;
@@ -112,9 +113,8 @@ section {
 }
 
 .boxes-container {
-    width: 90%; /* Set the width of the container */
-    height: 90%; /* Set the height of the container */
-    margin-top: 2rem;
+    width: 100%; /* Set the width of the container */
+    height: 100%; /* Set the height of the container */
     position: relative;
     display: flex;
     flex-wrap:wrap;
@@ -122,11 +122,11 @@ section {
 
 .box {
     width: 100%; /* Each box takes up 50% of the container width */
-    height: 18%; /* Each box takes up 20% of the container height */
+    height: 50%; /* Each box takes up 20% of the container height */
 }
 
 .boxtitle {
-    width: 20%;
+    width: 45%;
     height: 100%;
     border: 1px solid rgba(0, 0, 0, 0.5);
     display: flex;
@@ -143,8 +143,6 @@ section {
     justify-content: left;
     align-items: center;
     border: 1px solid rgba(0, 0, 0, 0.5);
-    background-color: lightgreen;
-    
 }
 
 .box2 {
@@ -158,23 +156,78 @@ section {
     background-color: lightsalmon;
 }
 
-.box2:nth-child(2){
-    top: 20%;
+@keyframes slide {
+    0% {
+      transform: translateX(0%);
+    }
+    100% {
+      transform: translateX(-100%);
+    }
+  }
+
+  .slideshow-container{
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+  }
+  
+  .slideshow {
+    width: 100%;
+    height: 100%;
+    animation: slide 5s infinite; /* Adjust the duration (5s in this case) as needed */
+  }
+
+.section3{
+    background-color: lightseagreen;
+    height: 100vh;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
-.box1:nth-child(3){
-    top: 40%;
-}
-.box2:nth-child(4){
-    top: 60%;
-}
-.box1:nth-child(5){
-    top: 80%;
+.section3 .content-box{
+    border: 1px dashed #000;
+
+    width: 80%;
+    height: 90%;
+    margin-top: 2rem;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+
 }
 
+.section3 .content-box h1{
+    font: 500 10rem 'Italianno';
+    margin-top: -1rem;
+}
 
+.menuBox {
+    border: 1px solid #000;
+    width: 90%;
+    height: 95%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 
-.section3 {
+.section4{
+    background-color: lightskyblue;
+    height: 100vh;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.section5 {
     background-color: lightgreen;
     height: 100vh;
     width: 100%;
