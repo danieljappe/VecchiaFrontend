@@ -1,10 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Italianno&display=swap');
+
 body {
     margin: 0;
     padding: 0;
     font-family: sans-serif;
-    overflow-y: scroll;
-    scrollbar-width: thin; /* for Firefox */
-    -webkit-scrollbar-width: thin; /* for Webkit based browsers */
+    overflow-y: hidden;
 }
 
 .body::-webkit-scrollbar {
@@ -34,20 +34,44 @@ body {
 }
 
 .nav-bar {
-    background-color: yellow;
-    height: 10vh;
-    width: 100%;
+    background-color: rgba(255, 255, 255, 0.8);;
+    border: 1px solid rgba(0, 0, 0, 0.5);
+    height: 3rem;
+    width: 50%;
     position: fixed;
     top: 0;
-    left: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 0 0 20px 20px;
+    z-index: 100;
 }
 
 .nav-bar-content {
     height: 100%;
     width: 100%;
     display: flex;
-    justify-content: space-evenly;
+    justify-content: center;
     align-items: center;
+}
+
+.nav-bar-content button{
+    height: 4vh;
+    width: 10vw;
+    border-radius: 10px;
+    border: none;
+    background-color: transparent;
+    border: 1px solid rgba(0, 0, 0, 0.25);
+    background-color: rgba(255, 255, 255, 0.8);
+    color: #000;
+    font-size: 1.5rem;
+    cursor: pointer;
+    margin: 0 1rem;
+}
+
+.nav-bar-content button:hover{
+    background-color: #444;
+    color: #fff;
+    transition: 0.5s;
 }
 
 section {
@@ -63,12 +87,105 @@ section {
 }
 
 .section1 {
-    background-color: aquamarine;
+    background-color: rgb(79,148,241);
+    transition: background-color 2s;
+}
+
+.section1.loaded {
+    background-color: rgb(79,148,241);
+    background-image: url("https://media1.giphy.com/media/YN7Xm4gQ54rRbC5Se5/giphy.gif");
+    background-size: auto 100%;
+    background-position: center;
+    background-repeat: no-repeat;
 }
 
 .section2 {
     background-color: lightblue;
+    height: 100vh;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
+
+.boxes-container {
+    width: 90%; /* Set the width of the container */
+    height: 90%; /* Set the height of the container */
+    margin-top: 2rem;
+    position: relative;
+    display: flex;
+    flex-wrap:wrap;
+}
+
+.box {
+    width: 100%; /* Each box takes up 50% of the container width */
+    height: 18%; /* Each box takes up 20% of the container height */
+}
+
+.boxtitle {
+    width: 20%;
+    height: 100%;
+    border: 1px solid rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(255, 255, 255, 0.8);
+}
+
+.box1 {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    border: 1px solid rgba(0, 0, 0, 0.5);
+    background-color: lightgreen;
+    
+}
+
+.box2 {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    display: flex;
+    justify-content: right;
+    align-items: center;
+    border: 1px solid rgba(0, 0, 0, 0.5);
+    background-color: lightsalmon;
+}
+
+.box2:nth-child(2){
+    top: 20%;
+}
+
+.box1:nth-child(3){
+    top: 40%;
+}
+.box2:nth-child(4){
+    top: 60%;
+}
+.box1:nth-child(5){
+    top: 80%;
+}
+
+
+
+.section3 {
+    background-color: lightgreen;
+    height: 100vh;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
 
 footer {
     background-color: yellow;
@@ -77,4 +194,46 @@ footer {
     display: flex;
     justify-content: center;
     align-items: center;
+    bottom: 0;
+}
+
+.content-box{
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.content-box h1{
+    font: 700 10rem 'Italianno';
+    margin-bottom: 2rem;
+    color: rgba(255, 255, 255, 0.9);;
+}
+
+.link-div{
+    height: 10vh;
+    width: 25%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+button{
+    height: 5vh;
+    width: 10vw;
+    border-radius: 10px;
+    border: none;
+    background-color: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    color: #fff;
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+button:hover{
+    background-color: #fff;
+    color: #000;
+    transition: 0.5s;
 }
