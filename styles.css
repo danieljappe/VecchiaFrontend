@@ -1,5 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Italianno&display=swap');
-
+p {
+    margin: 0;
+    font: 500 16px poppins;
+}
+h3 {
+    margin: 0;
+    font: 1000 20px poppins;
+}
 body {
     margin: 0;
     padding: 0;
@@ -179,7 +186,7 @@ section {
 
 .section3{
     background-color: lightseagreen;
-    height: 100vh;
+    height: 150vh;
     width: 100%;
     margin: 0;
     padding: 0;
@@ -192,9 +199,8 @@ section {
 .section3 .content-box{
     border: 1px dashed #000;
 
-    width: 80%;
+    width: 95%;
     height: 90%;
-    margin-top: 2rem;
     display: flex;
     justify-content: start;
     align-items: center;
@@ -206,14 +212,78 @@ section {
     margin-top: -1rem;
 }
 
+.menuBox div h2{
+    font: 500 5.5rem 'Italianno';
+    margin-bottom: -2rem;
+    margin-top: 1%;
+    text-align: center;
+}
+
+
 .menuBox {
     border: 1px solid #000;
-    width: 90%;
+    width: 95%;
     height: 95%;
     display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    margin-top: -5rem;
+}
+
+.menuCategory {
+    width: 95%; /* Set width as per your requirement */
+    height: 100%; /* Set height as per your requirement */
+    border: 1px dashed #000;
+    display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
 }
+
+.menuItems{
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: start;
+    width: 95%;
+    height: 95%;
+}
+
+.menuItem{
+    display: flex;
+    margin: 0.5rem;
+    flex-direction: row;
+    width: 100%;
+}
+
+.menuItem-left{
+    width: 80%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: start;
+    margin: 0 1rem;
+}
+
+.menuItem-left p {
+    
+}
+
+.menuItem-left h3{
+    text-align:start;
+}
+.menuItem-price{
+    width: 20%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+
 
 .section4{
     background-color: lightskyblue;
