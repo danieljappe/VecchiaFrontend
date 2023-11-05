@@ -13,47 +13,70 @@ document.addEventListener("DOMContentLoaded", function() {
             }
         });
     });
+
+    const cateringPics = [
+        "https://www.vecchia.dk/files/system/imagegallery/galleriet/img_4987_large.jpg",
+        "https://www.vecchia.dk/files/system/imagegallery/galleriet/img_4989_large.jpg",
+        "https://www.vecchia.dk/files/system/imagegallery/galleriet/img_4992_large.jpg",
+        "https://www.vecchia.dk/files/system/imagegallery/galleriet/img_4999_large.jpg",
+        "https://www.vecchia.dk/files/system/imagegallery/galleriet/img_5047_large.jpg",
+        "https://www.vecchia.dk/files/system/imagegallery/galleriet/img_5054_large.jpg",
+        "https://www.vecchia.dk/files/system/imagegallery/galleriet/img_5101_large.jpg",
+    ]
+    let cateringIndex = 0;
+const cateringImage = document.getElementById("cateringSlide");
+const nextCateringImage = document.getElementById("nextCateringSlide");
+
+function updateCateringSlide() {
+    nextCateringImage.src = cateringPics[cateringIndex];
+
+    nextCateringImage.style.opacity = 0; // Set opacity of the next image to 0
+    cateringImage.style.opacity = 1; // Set opacity of the current image to 1
+
+    setTimeout(() => {
+        nextCateringImage.style.opacity = 1; // Fade in the next image
+        cateringImage.style.opacity = 0; // Fade out the current image
+        cateringImage.src = nextCateringImage.src; // Set the source of the current image
+    }, 10); // Use a minimal delay to ensure proper transitioning
+    cateringIndex = (cateringIndex + 1) % cateringPics.length;
+}
+
+setInterval(updateCateringSlide, 2000);
     
 });
 
-slidePics = [
+const slidePics = [
     "https://www.vecchia.dk/files/system/imagegallery/galleriet/pizza-6_large.jpg",
     "https://www.vecchia.dk/files/system/imagegallery/galleriet/img_4985_large.jpg",
     "https://www.vecchia.dk/files/system/imagegallery/galleriet/img_2008_large.jpg",
     "https://www.vecchia.dk/files/system/imagegallery/galleriet/img_4976_large.jpg",
     "https://www.vecchia.dk/files/system/imagegallery/galleriet/img_5006_large.jpg",
-    "https://www.vecchia.dk/files/system/imagegallery/galleriet/img_4987_large.jpg",
-    "https://www.vecchia.dk/files/system/imagegallery/galleriet/img_4989_large.jpg",
-    "https://www.vecchia.dk/files/system/imagegallery/galleriet/img_4992_large.jpg",
-    "https://www.vecchia.dk/files/system/imagegallery/galleriet/img_4999_large.jpg",
     "https://www.vecchia.dk/files/system/imagegallery/galleriet/img_5014_large.jpg",
     "https://www.vecchia.dk/files/system/imagegallery/galleriet/img_5031_large.jpg",
     "https://www.vecchia.dk/files/system/imagegallery/galleriet/img_5036_large.jpg",
     "https://www.vecchia.dk/files/system/imagegallery/galleriet/img_5037_large.jpg",
     "https://www.vecchia.dk/files/system/imagegallery/galleriet/img_5046_large.jpg",
-    "https://www.vecchia.dk/files/system/imagegallery/galleriet/img_5047_large.jpg",
-    "https://www.vecchia.dk/files/system/imagegallery/galleriet/img_5054_large.jpg",
     "https://www.vecchia.dk/files/system/imagegallery/galleriet/img_5084_large.jpg",
-    "https://www.vecchia.dk/files/system/imagegallery/galleriet/img_5101_large.jpg",
     "https://www.vecchia.dk/files/system/imagegallery/galleriet/p1100005_large.jpg",
     "https://www.vecchia.dk/files/system/imagegallery/galleriet/p1100206_large.jpg",
     "https://www.vecchia.dk/files/system/imagegallery/galleriet/pizza-2_large.jpg",
     "https://www.vecchia.dk/files/system/imagegallery/galleriet/pizza-4_large.jpg"
 ]
 
+let currentIndex = 0;
+const slideImage = document.getElementById("slideImage");
+
 function slideShow() {
-    var slide = document.getElementById("slide");
-    var i = 0;
-    setInterval(function() {
-        slide.src = slidePics[i];
-        i = i + 1;
-        if (i == slidePics.length) {
-            i = 0;
-        }
-    }, 3000);
+    slideImage.src = slidePics[currentIndex];
+    currentIndex = (currentIndex + 1) % slidePics.length;
+    setTimeout(slideShow, 5000); // Change image every 5 seconds (5000 milliseconds)
 }
 
 slideShow();
+
+
+
+
 
 const antiPasti = [
     {name: "Bruchetta Classica", description: "Ristet brød m. tomat, mozzarella-ost, basilikum, hvidløg og rødløg", price: 50},

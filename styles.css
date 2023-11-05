@@ -152,37 +152,45 @@ section {
     border: 1px solid rgba(0, 0, 0, 0.5);
 }
 
+
+
 .box2 {
     position: absolute;
     bottom: 0;
     right: 0;
     display: flex;
-    justify-content: right;
+    justify-content: flex-end;
     align-items: center;
+    flex-direction: row-reverse;
     border: 1px solid rgba(0, 0, 0, 0.5);
     background-color: lightsalmon;
+    overflow: hidden;
 }
 
-@keyframes slide {
-    0% {
-      transform: translateX(0%);
-    }
-    100% {
-      transform: translateX(-100%);
-    }
-  }
+.slide {
+    width: 55%;
+    height: 100%;
+    position: relative;
+}
 
-  .slideshow-container{
+.image {
     width: 100%;
     height: 100%;
-    overflow: hidden;
-  }
-  
-  .slideshow {
+    object-fit: cover;
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 1;
+    transition: opacity 0.5s ease;
+}
+
+.slide img {
     width: 100%;
     height: 100%;
-    animation: slide 5s infinite; /* Adjust the duration (5s in this case) as needed */
-  }
+    object-fit: cover;
+}
+
+
 
 .section3{
     background-color: lightseagreen;
@@ -255,6 +263,17 @@ section {
     margin: 0.5rem;
     flex-direction: row;
     width: 100%;
+    border: 1px solid #000;
+}
+
+.menuTitle{
+    width: 100%;
+    height: 5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid black;
 }
 
 .menuItem-left{
