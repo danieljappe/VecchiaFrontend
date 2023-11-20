@@ -27,7 +27,7 @@ body, h1, h2, p, ul {
 
 @font-face {
     font-family: 'NotoSansDisplay'; /* Choose a name for your font */
-    src: url('../assets/NotoSansDisplay-VariableFont_wdth\,wght.ttf') format('truetype'); /* Replace 'your-font-file.ttf' with the actual filename */
+    src: url('../src/assets/NotoSansDisplay-VariableFont_wdth\,wght.ttf') format('truetype'); /* Replace 'your-font-file.ttf' with the actual filename */
     font-weight: normal;
     font-style: normal;
   }
