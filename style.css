@@ -45,25 +45,20 @@ header {
 /* Add this CSS for centering the navbar */
 .navbar {
     display: flex;
-    justify-content: center;
-    align-items: center;
+    justify-content: space-between;
     background-color: #333;
+    align-items: end;
     padding: 1em 0; /* Adjust padding as needed */
-    width: 75%;
-    border-radius: 0rem 0rem 1rem 1rem;
-    margin: auto; /* Center the navbar */
+    width: 100%;
 }
 
 .navbar-nav {
     display: flex;
-    justify-content: center;
+    justify-content: end;
     width: 100%;
 }
 
 .navbar-nav .nav-item {
-    display: flex;
-    justify-content: center;
-    align-items: center;
     margin-right: 15px;
 }
 
