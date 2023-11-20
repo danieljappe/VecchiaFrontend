@@ -76,12 +76,20 @@ section {
 }
 
 .about{
-    background-color: #999;
+    background-color: #eee;
     height: 100%;
-    width: 90%;
-
+    width: 77.5%;
 }
 
+.card-img-top {
+    height: 250px;
+    width: 50px;
+    object-fit: cover;
+}
+
+.col-md-4 {
+    margin-bottom: 12px;
+}
 
 /* Style the footer */
 footer {
