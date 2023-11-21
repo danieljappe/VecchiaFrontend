@@ -12,6 +12,19 @@
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
 
+    <!-- slick.js -->
+    <link rel="stylesheet" type="text/css" href="slick/slick.css"/>
+    <link rel="stylesheet" type="text/css" href="slick-1.8.1/slick/slick.css"/>
+    <link rel="stylesheet" type="text/css" href="slick-1.8.1/slick/slick-theme.css"/>
+
+
+    <style>
+        .slick-initialized .slick-slide {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+  </style>
   </head>
   <body>
 
@@ -151,7 +164,7 @@
     <section id="map" class="map">
       <h2>Find us</h2>
     </section>
-    <div class="map">
+    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2229.3091388640837!2d12.602148676475375!3d56.030636070557705!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x465231178b773da5%3A0x4e48be364f3bbfc!2sVecchia%20Maniera!5e0!3m2!1sen!2sdk!4v1700519155343!5m2!1sen!2sdk" width="600" height="450" style="border: 1px solid; border-radius: 20px;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
       <!-- Google Maps API kode -->
           <!-- Defined commutes SVGs -->
           <svg class="hide">
@@ -365,6 +378,80 @@
         <h2>About Us</h2>
         <p>Discover the story behind Your Pizzeria. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
     </section>
+
+    <!-- Order Section -->
+    <section id="order" class="about">
+      <h2>Order catering here</h2>
+      <p>Enter your order here and send a mail to us:</p>      
+      
+    <form id="orderForm">
+        <!-- Your form fields go here -->
+        <input type="text" id="itemName" name="itemName" placeholder="Item Name" required>
+        <input type="number" id="quantity" name="quantity" placeholder="Quantity" required>
+
+    
+        <!-- Add a button to trigger the email client -->
+        <button type="button" onclick="sendOrder()">Send Order</button>
+    </form>
+
+    <script>
+      function sendOrder() {
+          // Get form data
+          var itemName = document.getElementById('itemName').value;
+          var quantity = document.getElementById('quantity').value;
+  
+          // Construct the mailto URI
+          var mailtoUri = "mailto:danieljappe@gmail.com?subject=Order&body=Item: " + itemName + "%0AQuantity: " + quantity;
+  
+          // Open the user's email client
+          window.location.href = mailtoUri;
+      }
+  </script>
+  </section>
+
+  <section style="margin-top: 10vh;margin-bottom: 10vh;">
+    <div class="center-container">
+      <div class="slide-container">
+          <h2 class="text-center mb-4">Employees</h2>
+  
+          <div class="slider-for">
+              <!-- Slides for main content -->
+              <div>
+                  <div>
+                      <img src="IMG_1345.jpg" alt="Slide 1">
+                      <p>Text for Slide 1</p>
+                  </div>
+              </div>
+              <div>
+                  <div>
+                      <img src="IMG_1274.jpg" alt="Slide 2">
+                      <p>Text for Slide 2</p>
+                  </div>
+              </div>
+              <div>
+                  <div>
+                      <img src="IMG_1302.jpg" alt="Slide 3">
+                      <p>Text for Slide 3</p>
+                  </div>
+              </div>
+          </div>
+  
+          <div class="slider-nav">
+              <!-- Slides for navigation/thumbnail images -->
+              <div>
+                  <img src="IMG_1345.jpg" alt="Slide 1">
+              </div>
+              <div>
+                  <img src="IMG_1274.jpg" alt="Slide 2">
+              </div>
+              <div>
+                  <img src="IMG_1302.jpg" alt="Slide 3">
+              </div>
+          </div>
+      </div>
+  </div>
+  </section>
+
 
 <!-- Contact Section -->
 <section id="contact">
@@ -1363,5 +1450,39 @@
       }
     </script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCIeqXZH-FXaqtmPKNkaFszj6F7SUFBSuk&callback=initMap&libraries=places,geometry&solution_channel=GMP_QB_commutes_v2_c" async defer></script>
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+    <!-- slick.js -->
+    <script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+    <script type="text/javascript" src="slick-1.8.1/slick/slick.js"></script>
+
+    <!-- Initialize Slick Carousel -->
+    <script>
+      $(document).ready(function(){
+          // Initialize the main content carousel
+          $('.slider-for').slick({
+              slidesToShow: 1,
+              slidesToScroll: 1,
+              arrows: false,
+              fade: true,
+              asNavFor: '.slider-nav'
+          });
+
+          // Initialize the navigation/thumbnail carousel
+          $('.slider-nav').slick({
+              slidesToShow: 3,
+              slidesToScroll: 1,
+              asNavFor: '.slider-for',
+              dots: true,
+              centerMode: true,
+              focusOnSelect: true
+          });
+      });
+    </script>
+  
   </body>
 </html>

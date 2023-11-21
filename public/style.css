@@ -117,6 +117,75 @@ footer {
     transition: top 0.3s ease-in-out; /* Add smooth transition to the top property */
 }
 
+/* Slider */
+
+.center-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+.slick-initialized .slick-slide {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.slide-container {
+    max-width: 800px;
+}
+
+.slick-slider {
+    position: relative;
+    display: block;
+    box-sizing: border-box;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    -webkit-touch-callout: none;
+    -khtml-user-select: none;
+    -ms-touch-action: pan-y;
+    touch-action: pan-y;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.slider-for img {
+    border: 5px solid;
+    width: auto;
+    height: 80vh;
+}
+
+.slider-nav img {
+    max-width: 80px;
+    margin: 5px;
+}
+
+.slider-nav {
+    text-align: center;
+}
+
+.slider-nav .slick-center img {
+    border: 2px solid #007bff;
+}
+
+.slider-nav .slick-list.draggable{
+    border: 1px solid;
+    background-color: #444;
+}
+
+.slider-for .slick-list.draggable{
+    border: 1px solid;
+    background-color: #555;
+    padding: 10px;
+}
+
+.slick-initialized .slick-slide {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 /* Responsive styles */
 @media only screen and (max-width: 1000px) {
     html, body {
