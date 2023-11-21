@@ -27,7 +27,7 @@ body, h1, h2, p, ul {
 
 @font-face {
     font-family: 'NotoSansDisplay'; /* Choose a name for your font */
-    src: url('/src /assets/NotoSansDisplay-VariableFont_wdth\,wght.ttf') format('truetype'); /* Replace 'your-font-file.ttf' with the actual filename */
+    src: url('/src/assets/NotoSansDisplay-VariableFont_wdth\,wght.ttf') format('truetype'); /* Replace 'your-font-file.ttf' with the actual filename */
     font-weight: normal;
     font-style: normal;
   }
@@ -94,13 +94,13 @@ section {
 }
 
 .card-img-top {
-    height: 250px;
+    height: 200px;
     width: 50px;
     object-fit: cover;
 }
 
-.col-md-4 {
-    margin-bottom: 12px;
+.col-md-2 {
+    margin-bottom: 24px;
 }
 
 /* Style the footer */
