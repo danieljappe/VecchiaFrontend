@@ -28,6 +28,41 @@
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
 
+  <!-- Login -->
+  <script>
+    document.getElementById('loginForm').addEventListener('submit', function (event) {
+        event.preventDefault(); // Prevent the default form submission
+
+        const username = document.getElementById('username').value;
+        const password = document.getElementById('password').value;
+
+        // Make an asynchronous login request
+        fetch('/login', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            body: new URLSearchParams({
+                email: username,
+                password: password,
+            }),
+        })
+        .then(response => {
+            if (response.ok) {
+                // Successful login, redirect to the specified location
+                window.location.href = response.headers.get('Location');
+            } else {
+                // Handle login failure (show an error message, etc.)
+                console.error('Login failed');
+            }
+        })
+        .catch(error => {
+            // Handle network or other errors
+            console.error('Error during login:', error);
+        });
+    });
+</script>
+
   </head>
   <body>
 
@@ -63,16 +98,16 @@
       </div>
       <div class="modal-body">
         <!-- Your login form goes here -->
-        <form>
-          <div class="form-group">
-            <label for="username">Username</label>
-            <input type="text" class="form-control" id="username" placeholder="Enter your username">
-          </div>
-          <div class="form-group">
-            <label for="password">Password</label>
-            <input type="password" class="form-control" id="password" placeholder="Enter your password">
-          </div>
-          <button type="submit" class="btn btn-primary">Login</button>
+        <form id="loginForm">
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" class="form-control" id="username" placeholder="Enter your username">
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" class="form-control" id="password" placeholder="Enter your password">
+            </div>
+            <button type="submit" class="btn btn-primary">Login</button>
         </form>
       </div>
     </div>
