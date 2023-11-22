@@ -10,15 +10,16 @@
 }
 
 
-  .map{
-    height: 100%;
-    width: 100%;
+.map {
+    width: 77.5%;
     display: flex;
-
+    flex-direction: column;
     justify-content: center;
+    align-items: center;
     margin-bottom: 24px;
   }
-
+  
+ 
   /* Reset some default margin and padding */
 body, h1, h2, p, ul {
     margin: 0;

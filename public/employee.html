@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Employee Page</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="employeeStyle.css">
+
+</head>
+
+<body>
+
+    <!-- Sidebar -->
+    <div id="sidebar">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
+        <a href="#" onclick="openSection('home')">Home</a>
+        <a href="#" onclick="openSection('menu')">Menu</a>
+        <a href="#" onclick="openSection('catering-orders')">Catering Orders</a>
+    </div>
+
+    <!-- Page Content -->
+    <div id="main">
+        <span id="toggle-btn" onclick="toggleNavVisibility()">☰</span>
+
+        <!-- Home Section -->
+        <div class="content-container">
+            <section id="home">
+                <h2>Welcome to the Employee Page!</h2>
+                <p>This is the home section.</p>
+            </section>
+        </div>
+
+        <!-- Menu Section -->
+        <div class="content-container">
+            <section id="menu" style="display:none;">
+                <h2>Menu</h2>
+                <!-- Add your CRUD operations here for menu items -->
+                <!-- Example: -->
+                <div class="mb-2">
+                    <button class="btn btn-primary" data-toggle="modal" data-target="#addItemModal">Add Item</button>
+                </div>
+                <!-- Display Menu Items -->
+                <div class="row">
+                    <!-- Example Card -->
+                    <div class="col-md-4 mb-4">
+                        <div class="card">
+                            <img src="item-image.jpg" class="card-img-top" alt="Item Image">
+                            <div class="card-body">
+                                <h5 class="card-title">Item Name</h5>
+                                <p class="card-text">Item Description</p>
+                                <!-- Add your CRUD buttons (Edit, Delete, etc.) here -->
+                                <!-- Example: -->
+                                <button class="btn btn-warning">Edit</button>
+                                <button class="btn btn-danger">Delete</button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- End Example Card -->
+                </div>
+            </section>
+        </div>
+
+        <!-- Catering Orders Section -->
+        <div class="content-container">
+            <section id="catering-orders" style="display:none;">
+                <h2>Catering Orders</h2>
+                <!-- Add your functionality for catering orders here -->
+                <!-- Example: -->
+                <p>No catering orders currently.</p>
+
+                <p>Evt calender her (FullCalendar.js)</p>
+            </section>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+    <!-- Custom JavaScript for sidebar functionality -->
+    <script>
+        function closeNav() {
+            var sidebar = document.getElementById("sidebar");
+            var main = document.getElementById("main");
+            var toggleBtn = document.getElementById("toggle-btn");
+
+            sidebar.style.left = "-250px";
+            main.style.marginLeft = "0";
+            toggleBtn.style.opacity = 1; /* Make the toggle button visible */
+        }
+
+        function openNav() {
+            var sidebar = document.getElementById("sidebar");
+            var main = document.getElementById("main");
+            var toggleBtn = document.getElementById("toggle-btn");
+
+            sidebar.style.left = "0";
+            main.style.marginLeft = "250px";
+            toggleBtn.style.opacity = 0; /* Make the toggle button transparent */
+        }
+
+        function toggleNavVisibility() {
+            var sidebar = document.getElementById("sidebar");
+            var main = document.getElementById("main");
+            var toggleBtn = document.getElementById("toggle-btn");
+
+            if (sidebar.style.left === "0px") {
+                sidebar.style.left = "-250px";
+                main.style.marginLeft = "0";
+                toggleBtn.style.opacity = 1; /* Make the toggle button visible */
+            } else {
+                sidebar.style.left = "0";
+                main.style.marginLeft = "250px";
+                toggleBtn.style.opacity = 0; /* Make the toggle button transparent */
+            }
+        }
+
+        function openSection(sectionId) {
+            var sections = ["home", "menu", "catering-orders"];
+            var sidebar = document.getElementById("sidebar");
+
+            // Hide all sections
+            for (var i = 0; i < sections.length; i++) {
+                document.getElementById(sections[i]).style.display = "none";
+            }
+
+            // Display the selected section
+            document.getElementById(sectionId).style.display = "block";
+
+            // Do not close the sidebar here
+        }
+
+        // Ensure the toggle button is initially hidden
+        document.addEventListener("DOMContentLoaded", function () {
+            var toggleBtn = document.getElementById("toggle-btn");
+            toggleBtn.style.opacity = 0;
+        });
+    </script>
+
+
+</body>
+
+</html>
