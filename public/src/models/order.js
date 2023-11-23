@@ -4,7 +4,8 @@ export default class Order {
     description;
     price;
     phone;
-    
+    email;
+
     // Contructor
     constructor(
         orderId,
@@ -12,6 +13,7 @@ export default class Order {
         description,
         price,
         phone,
+        email,
     ) {
         //direct class variables
         this.orderId = orderId;
@@ -19,5 +21,7 @@ export default class Order {
         this.description = description;
         this.price = price;
         this.phone = phone;
-    } 
-} export { Order as Order };
+        this.email = email;
+    }
+}
+export { Order as Order };

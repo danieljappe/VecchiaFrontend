@@ -23,4 +23,5 @@ export default class Employee {
         this.phone = phone;
         this.isAdmin = isAdmin;
     } 
-} export { Employee as Employee };
+}
+export { Employee as Employee };

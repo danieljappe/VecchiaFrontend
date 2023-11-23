@@ -31,7 +31,6 @@ export default class MenuItemFetcher extends Fetcher {
 
     getAll = async function() {
         const response = await this.fetchData(this.allMenuItems);
-        //const response = await this.fetchData(this.allShowings3Months);
         console.log(`There are ${response.length} menu items`);
         if (response.length === 0) return [];
         let items = [];
