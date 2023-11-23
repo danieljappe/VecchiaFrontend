@@ -24,4 +24,5 @@ export default class Fetcher {
             throw error;
         } 
     }
-}  export { Fetcher as Fetcher };
+}
+export { Fetcher as Fetcher };

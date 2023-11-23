@@ -20,4 +20,5 @@ export default class MenuItem {
         this.price = price;
         this.category = category;
     } 
-} export { MenuItem as MenuItem };
+}
+export { MenuItem as MenuItem };
