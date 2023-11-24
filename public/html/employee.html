@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Employee Page</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/public/css/employeeStyle.css">
+
+</head>
+
+<body>
+
+    <!-- Sidebar -->
+    <div id="sidebar">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
+        <a href="#" onclick="openSection('home')">Home</a>
+        <a href="#" onclick="openSection('menu')">Menu</a>
+        <a href="#" onclick="openSection('catering-orders')">Catering Orders</a>
+    </div>
+
+    <!-- Page Content -->
+    <div id="main">
+        <span id="toggle-btn" onclick="toggleNavVisibility()">☰</span>
+
+        <!-- Home Section -->
+        <div class="content-container">
+            <section id="home">
+                <h2>Welcome to the Employee Page!</h2>
+                <p>This is the home section.</p>
+            </section>
+        </div>
+
+        <!-- Menu Section -->
+        <div class="content-container">
+            <section id="menu" style="display: none;">
+                <h2>Menu</h2>
+                <div class="mb-2">
+                    <button class="btn btn-primary" data-toggle="modal" data-target="#addItemModal">Add Item</button>
+                
+                    <!-- Sorting Dropdown -->
+                    <label for="categorySort">Sort by Category:</label>
+                    <select id="categorySort" class="form-control" onchange="sortMenuItems()">
+                        <option value="all">All Categories</option>
+                        <!-- Add options dynamically based on available categories -->
+                    </select>
+                </div>
+                <!-- Display Menu Items -->
+                <div class="row" id="menuItemsContainer">
+                    <!-- Menu items will be dynamically added here -->
+                </div>
+            </section>
+        </div>
+
+        <!-- Catering Orders Section -->
+        <div class="content-container">
+            <section id="catering-orders" style="display:none;">
+                <h2>Catering Orders</h2>
+                <!-- Add your functionality for catering orders here -->
+                <!-- Example: -->
+                <p>No catering orders currently.</p>
+
+                <p>Evt calender her (FullCalendar.js)</p>
+            </section>
+        </div>
+    </div>
+
+    <!-- Add Item Modal -->
+    <div class="modal fade" id="addItemModal" tabindex="-1" role="dialog" aria-labelledby="addItemModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+
+            <div class="modal-header">
+              <h5 class="modal-title" id="addItemModalLabel">Add Item</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+
+            <div class="modal-body">
+                <form id="addItemForm">
+                <div class="form-group">
+                    <label for="itemName">Name</label>
+                    <input type="text" class="form-control" id="itemName" required>
+                </div>
+                <div class="form-group">
+                    <label for="itemDescription">Description</label>
+                    <textarea class="form-control" id="itemDescription" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="itemPrice">Price</label>
+                    <input type="number" class="form-control" id="itemPrice" required>
+                </div>
+                <div class="form-group">
+                    <label for="itemCategory">Category</label>
+                    <input type="text" class="form-control" id="itemCategory" required>
+                </div>
+                <button type="submit" class="btn btn-primary">Add Item</button>
+                </form>
+            </div>
+          </div>
+        </div>
+    </div>
+
+    <!-- Edit Item Modal -->
+    <div class="modal fade" id="editItemModal" tabindex="-1" role="dialog" aria-labelledby="editItemModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+          <h5 class="modal-title" id="editItemModalLabel">Edit Item</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+            </div>
+            <div class="modal-body">
+              <!-- Add your form elements for editing here -->
+              <form id="editItemForm">
+                <input type="hidden" id="editItemId">
+                <div class="form-group">
+              <label for="editItemName">Name</label>
+              <input type="text" class="form-control" id="editItemName" required>
+                </div>
+                <div class="form-group">
+              <label for="editItemDescription">Description</label>
+              <textarea class="form-control" id="editItemDescription" required></textarea>
+                </div>
+                <div class="form-group">
+              <label for="editItemPrice">Price</label>
+              <input type="number" class="form-control" id="editItemPrice" required>
+                </div>
+                <div class="form-group">
+              <label for="editItemCategory">Category</label>
+              <input type="text" class="form-control" id="editItemCategory" required>
+                </div>
+                <button type="submit" class="btn btn-primary">Save Changes</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+  
+
+    
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+    <!-- Custom JavaScript for sidebar functionality -->
+    <script src="/public/js/employeeScript.js">
+    </script>
+
+
+</body>
+
+</html>

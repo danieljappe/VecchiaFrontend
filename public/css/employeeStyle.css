@@ -67,3 +67,17 @@ body {
     max-width: 800px;
     margin: 0 auto;
 }
+
+.row {
+    border: 1px solid black;
+}
+
+.card {
+
+}
+
+.form-control {
+    display: inline-block; /* Change to inline-block or other display value */
+    width: auto !important; /* Change width to auto with !important to override Bootstrap */
+    /* Add other custom styles if needed */
+}
