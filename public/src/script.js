@@ -1,3 +1,4 @@
+import { MenuItemFetcher } from "./utils/fetcher/menu_item_fetcher.js";
 let lastScrollTop = 0;
 
     window.addEventListener("scroll", function(){
@@ -14,3 +15,8 @@ let lastScrollTop = 0;
 
         lastScrollTop = scrollTop;
     });
+
+//testing
+/*const menuItemFetcher = new MenuItemFetcher();
+const allMenuItems = await menuItemFetcher.getAll();
+console.log(allMenuItems);*/

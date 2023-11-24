@@ -1,5 +1,5 @@
-import Fetcher from "./fetcher";
-import MenuItem from "../../models/menu_item";
+import {Fetcher} from "./fetcher.js";
+import {MenuItem} from "../../models/menu_item.js";
 
 export default class MenuItemFetcher extends Fetcher {
     allMenuItems;

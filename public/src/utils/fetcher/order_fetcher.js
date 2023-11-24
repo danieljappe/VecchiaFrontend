@@ -1,5 +1,5 @@
-import Fetcher from "./fetcher";
-import Order from "../../models/menu_item";
+import {Fetcher} from "./fetcher.js";
+import {Order} from "../../models/menu_item.js";
 
 export default class OrderFetcher extends Fetcher {
     allOrders;

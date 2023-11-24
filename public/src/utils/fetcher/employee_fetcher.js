@@ -1,5 +1,5 @@
-import Fetcher from "./fetcher";
-import Employee from "../../models/employee";
+import {Fetcher} from "./fetcher.js";
+import {Employee} from "../../models/employee.js";
 
 export default class EmployeeFetcher extends Fetcher {
     allEmployees;
