@@ -17,6 +17,6 @@ let lastScrollTop = 0;
     });
 
 //testing
-/*const menuItemFetcher = new MenuItemFetcher();
+const menuItemFetcher = new MenuItemFetcher();
 const allMenuItems = await menuItemFetcher.getAll();
-console.log(allMenuItems);*/
+console.log(allMenuItems);
