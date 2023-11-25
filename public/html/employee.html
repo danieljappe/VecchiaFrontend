@@ -38,14 +38,29 @@
             <section id="menu" style="display: none;">
                 <h2>Menu</h2>
                 <div class="mb-2">
-                    <button class="btn btn-primary" data-toggle="modal" data-target="#addItemModal">Add Item</button>
+
+                    <!-- <div class="buttons"> -->
+
+                        <button class="btn btn-primary" data-toggle="modal" data-target="#addItemModal">Add Item</button>
+                        <select id="categorySort" class="form-control" onchange="sortMenuItems()">
+                            <!-- Include "All Categories" option in the HTML -->
+                            <option value="all">All Categories</option>
+                            <!-- Add options dynamically based on available categories -->
+                        </select>
+
+                    <!-- </div> -->
+                    
                 
-                    <!-- Sorting Dropdown -->
-                    <label for="categorySort">Sort by Category:</label>
-                    <select id="categorySort" class="form-control" onchange="sortMenuItems()">
-                        <option value="all">All Categories</option>
-                        <!-- Add options dynamically based on available categories -->
-                    </select>
+                    <!-- <div class="category-box"> -->
+
+                                    <!-- Sorting Dropdown -->
+                                    
+                        <label for="categorySort">Sort by Category:</label>
+                        
+                        <span class="category-title" id="selectedCategory"></span> <!-- Added span to display selected category -->
+
+                    <!-- </div> -->
+                    
                 </div>
                 <!-- Display Menu Items -->
                 <div class="row" id="menuItemsContainer">

@@ -16,28 +16,32 @@ async function fetchMenuItems() {
         menuItems.forEach(item => {
             const card = document.createElement('div');
             card.className = 'col-md-4 mb-4';
-        
+
             card.innerHTML = `
                 <div class="card">
-                    <img src="item-image.jpg" class="card-img-top" alt="Item Image">
+                    <!-- <img src="item-image.jpg" class="card-img-top" alt="Item Image"> -->
                     <div class="card-body">
                         <h5 class="card-title">${item.name}</h5>
                         <p class="card-text">${item.description}</p>
                         <p class="card-text"><strong>Price:</strong> ${item.price.toFixed(2)}kr.-</p>
                         <p class="card-text"><strong>Category:</strong> ${item.category}</p>
                         <div class="btn-group" role="group">
-                        <button class="btn btn-warning" onclick="editItem(${item.id}, '${item.name}', '${item.description}', ${item.price}, '${item.category}')">Edit</button>
-                        <button class="btn btn-danger" onclick="deleteItem(${item.id})">Delete</button>
+                            <button class="btn btn-warning" onclick="editItem(${item.id}, '${item.name}', '${item.description}', ${item.price}, '${item.category}')">Edit</button>
+                            <button class="btn btn-danger" onclick="deleteItem(${item.id})">Delete</button>
                         </div>
                     </div>
                 </div>
             `;
-        
+
             menuItemsContainer.appendChild(card);
         });
 
-        // Update the sorting dropdown options
+        // Update the sorting dropdown options and selected category span
         updateCategoryDropdown();
+
+        // Set the selected category span explicitly for the "All Categories" case
+        const selectedCategorySpan = document.getElementById('selectedCategory');
+        selectedCategorySpan.textContent = 'All Categories';
 
         // Display the menu section
         document.getElementById('menu').style.display = 'block';
@@ -45,6 +49,8 @@ async function fetchMenuItems() {
         console.error('Error fetching menu items:', error);
     }
 }
+
+
 
 // Function to update the sorting dropdown options
 function updateCategoryDropdown() {
@@ -64,6 +70,15 @@ function sortMenuItems() {
     const categorySortDropdown = document.getElementById('categorySort');
     const selectedCategory = categorySortDropdown.value;
 
+    // Set the selected category in the span element
+    const selectedCategorySpan = document.getElementById('selectedCategory');
+    
+    if (selectedCategory === 'all') {
+        selectedCategorySpan.textContent = 'All Categories';
+    } else {
+        selectedCategorySpan.textContent = `${selectedCategory}`;
+    }
+
     const filteredMenuItems = selectedCategory === 'all' ?
         allMenuItems :
         allMenuItems.filter(item => item.category === selectedCategory);
@@ -78,15 +93,15 @@ function sortMenuItems() {
 
         card.innerHTML = `
                 <div class="card">
-                    <img src="item-image.jpg" class="card-img-top" alt="Item Image">
+                    <!-- <img src="item-image.jpg" class="card-img-top" alt="Item Image"> -->
                     <div class="card-body">
                         <h5 class="card-title">${item.name}</h5>
                         <p class="card-text">${item.description}</p>
                         <p class="card-text"><strong>Price:</strong> ${item.price.toFixed(2)}kr.-</p>
                         <p class="card-text"><strong>Category:</strong> ${item.category}</p>
                         <div class="btn-group" role="group">
-                        <button class="btn btn-warning" onclick="editItem(${item.id}, '${item.name}', '${item.description}', ${item.price}, '${item.category}')">Edit</button>
-                        <button class="btn btn-danger" onclick="deleteItem(${item.id})">Delete</button>
+                            <button class="btn btn-warning" onclick="editItem(${item.id}, '${item.name}', '${item.description}', ${item.price}, '${item.category}')">Edit</button>
+                            <button class="btn btn-danger" onclick="deleteItem(${item.id})">Delete</button>
                         </div>
                     </div>
                 </div>
@@ -95,6 +110,7 @@ function sortMenuItems() {
         menuItemsContainer.appendChild(card);
     });
 }
+
 
 // Ensure the toggle button is initially hidden
 document.addEventListener("DOMContentLoaded", function () {
