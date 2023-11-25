@@ -27,7 +27,7 @@ async function fetchMenuItems() {
                         <p class="card-text"><strong>Category:</strong> ${item.category}</p>
                         <div class="btn-group" role="group">
                         <button class="btn btn-warning" onclick="editItem(${item.id}, '${item.name}', '${item.description}', ${item.price}, '${item.category}')">Edit</button>
-                            <button class="btn btn-danger">Delete</button>
+                        <button class="btn btn-danger" onclick="deleteItem(${item.id})">Delete</button>
                         </div>
                     </div>
                 </div>
@@ -85,10 +85,8 @@ function sortMenuItems() {
                         <p class="card-text"><strong>Price:</strong> ${item.price.toFixed(2)}kr.-</p>
                         <p class="card-text"><strong>Category:</strong> ${item.category}</p>
                         <div class="btn-group" role="group">
-                        <button class="btn btn-warning" onclick="console.log('Edit button clicked:', ${JSON.stringify(item)}); editItem(${item.ID}, '${item.name}', '${item.description}', ${item.price}, '${item.category}')">Edit</button>
-
-                            
-                            <button class="btn btn-danger">Delete</button>
+                        <button class="btn btn-warning" onclick="editItem(${item.id}, '${item.name}', '${item.description}', ${item.price}, '${item.category}')">Edit</button>
+                        <button class="btn btn-danger" onclick="deleteItem(${item.id})">Delete</button>
                         </div>
                     </div>
                 </div>
@@ -187,7 +185,7 @@ document.getElementById('editItemForm').addEventListener('submit', function (eve
 
     // Create a new menu item object
     const editedItem = {
-        ID: itemId,
+        itemID: itemId,
         name: itemName,
         description: itemDescription,
         price: itemPrice,
@@ -195,7 +193,8 @@ document.getElementById('editItemForm').addEventListener('submit', function (eve
     };
 
     // Make a PUT request to update the item
-    fetch('https://vecchiabackend.azurewebsites.net/menuItems/update', {
+    let editUrl = 'https://vecchiabackend.azurewebsites.net/menuItems/update/' + itemId;
+    fetch(editUrl, {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json'
@@ -217,11 +216,69 @@ document.getElementById('editItemForm').addEventListener('submit', function (eve
     })
     .catch(error => {
         console.error('Error updating item:', error);
-        return error.text();
     })
-    .then(errorText => {
-        console.log('Error response text:', errorText);
+});
+
+
+
+            // DELETE
+
+
+            // Function to delete a menu item
+            async function deleteItem(itemId) {
+                try {
+                    const deleteUrl = `https://vecchiabackend.azurewebsites.net/menuItems/delete/${itemId}`;
+                    const response = await fetch(deleteUrl, {
+                        method: 'DELETE',
+                    });
+            
+                    if (response.ok) {
+                        console.log(`Item with ID ${itemId} deleted successfully.`);
+                        // Optionally update the menu items
+                        fetchMenuItems();
+                    } else {
+                        console.error(`Error deleting item with ID ${itemId}.`);
+                    }
+                } catch (error) {
+                    console.error('Error deleting item:', error);
+                }
+            }
+            
+
+// ... (your existing code)
+
+document.addEventListener('DOMContentLoaded', function () {
+    // ... (your existing code)
+
+    // Handle delete button click
+    document.getElementById('menuItemsContainer').addEventListener('click', function (event) {
+        if (event.target.classList.contains('btn-danger')) {
+            const itemId = event.target.closest('.card').dataset.itemId;
+            deleteItem(itemId);
+        }
     });
+
+    // ... (your existing code)
+});
+
+// ... (your existing code)
+
+// Update the HTML with the fetched menu items
+const menuItemsContainer = document.getElementById('menuItemsContainer');
+menuItemsContainer.innerHTML = '';
+
+menuItems.forEach(item => {
+    const card = document.createElement('div');
+    card.className = 'col-md-4 mb-4';
+    card.dataset.itemId = item.id; // Set the data attribute for item ID
+
+    card.innerHTML = `
+        <!-- ... (your existing code) -->
+        <button class="btn btn-danger">Delete</button>
+        <!-- ... (your existing code) -->
+    `;
+
+    menuItemsContainer.appendChild(card);
 });
 
 
