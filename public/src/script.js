@@ -1,5 +1,6 @@
 import { MenuCategory } from "./models/menu_category.js";
 import { MenuItemFetcher } from "./utils/fetcher/menu_item_fetcher.js";
+import MenuList from "./utils/menu_list/menu_list.js";
 let lastScrollTop = 0;
 
     window.addEventListener("scroll", function(){
@@ -42,3 +43,6 @@ for (let i = 0; i < allMenuItems.length; i++) {
 console.log(menuCategories);
 
 //make 
+const menuList = new MenuList();
+menuList.generateCategoryListView();
+menuList.generateMenuItemListView();

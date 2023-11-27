@@ -1,93 +1,38 @@
-import ElementMaker from "../element_maker.js";
+import {ElementMaker} from "../element_maker.js";
 
 export default class MenuList {
-    elementMaker;
     destination;
+    menuCategories;
+    elementMaker;
     
 
-    constructor() {
-        this.elementMaker = new ElementMaker();
+    constructor(menuCategories) {
         this.destination = document.getElementById('menu');
+        this.menuCategories = menuCategories;
+        this.elementMaker = new ElementMaker();
     }
 
-    generateListViewItems = () => {
-        for (let i = 0; i < this.schedule.schedule.length; i = i + this.schedule.showsPerDay) {
-            this._createCard(
-                this.schedule.schedule[i],
-                this.schedule.schedule[i+1],
-            );
-            if (i == 7) break; //allow max 8 movies
+    generateCategoryListView = () => {
+        //generates a list of categories, later to be filled by each menu items
+        for (let i = 0; i < this.menuCategories.length; i++) {
+            //add header
+            const card = this.elementMaker.getDiv('card');
+
+            //get header for the card
+            card.appendChild(this.elementMaker.getP('category-title', this.menuCategories[i].categoryTitle));
+            card.appendChild(this.elementMaker.getDiv("category-items"));
+    
+            //add to list view
+            this.destination.appendChild(card);
         }
     }
 
-    _getTheater = (theaterId) => {
-        if (theaterId === 0) {
-            return "\u00A0";
-        } else {
-            return "Theater " + theaterId;
+    generateMenuItemListView = () => {
+        //adds all menu items to their respective categories
+        for (let i = 0; i < this.menuCategory.menuItems.length; i++) {
+            //add card under category header
+
         }
     }
-
-    _getTime = (theaterId, time) => {
-        if (theaterId === 0) {
-            return " ";
-        } else {
-            return time;
-        }
-    }
-
-    _createCard = function(showing1, showing2) {
-        //initial card div
-        const card = this.elementMaker.getDiv('date-card');
     
-        //get header for the card
-        card.appendChild(this.elementMaker.getP('date-text date-text-box', showing1.date));
-    
-        //make the movie-container for both movies
-        card.appendChild(this._getMovieContainer(showing1, this.isMO));
-        card.appendChild(this._getMovieContainer(showing2, this.isMO));
-    
-        //add to list view
-        this.scheduleDestination.appendChild(card);
-    }
-
-    _getMovieContainer = function(showing) {
-        const movieContainer = this.elementMaker.getDiv('movie-container');
-    
-        //making a header, that display the time and theater
-        const header = this.elementMaker.getDiv('movie-time-box');
-        header.append(this.elementMaker.getP('movie-time-text', this._getTime(showing.theaterId, showing.time)));
-        header.append(this.elementMaker.getP('movie-time-text', this._getTheater(showing.theaterId)));
-        movieContainer.appendChild(header);
-    
-        const movieBox = this.elementMaker.getDiv('movie-box');
-    
-        //making a dark overlay with title and genre
-        showing.theaterId !== 0? console.log(showing) : null;
-        const overlay = this.elementMaker.getDiv('movie-overlay');
-        overlay.appendChild(this.elementMaker.getP('movie-title', showing.movie.title));
-        overlay.appendChild(this.elementMaker.getP('genre-title', showing.movie.genre));
-        movieBox.appendChild(overlay);
-    
-        //add image
-        const img = document.createElement('img');
-        img.className = 'poster-image';
-        img.src = showing.movie.poster;
-        img.alt = showing.movie.title;
-        movieBox.appendChild(img);
-    
-        //add buttons
-        const buttons = this.elementMaker.getDiv('movie-action-buttons');
-        if (!this.isMO) {
-            buttons.appendChild(this.elementMaker.getButton('action-button-left', null, 'Details', true, showing, false));
-            buttons.appendChild(this.elementMaker.getButton('action-button-right', showing.id, 'Book Seats', false, showing, false));
-        } else {
-            buttons.appendChild(this.elementMaker.getButton('mo-action-button', null, 'Edit', false, showing, true));
-        }
-        movieBox.appendChild(buttons);
-        movieContainer.appendChild(movieBox);
-        //return the movie container
-        return movieContainer;
-    }
-    
-} export { MovieSchedule };
+} export { MenuList };
