@@ -20,5 +20,9 @@ export default class MenuItem {
         this.price = price;
         this.category = category;
     } 
+
+    toString() {
+        return `${this.itemId}, ${this.name}, ${this.category}`;
+    }
 }
 export { MenuItem as MenuItem };
