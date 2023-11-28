@@ -42,29 +42,31 @@
                     <!-- <div class="buttons"> -->
 
                         <button class="btn btn-primary" data-toggle="modal" data-target="#addItemModal">Add Item</button>
-                        <select id="categorySort" class="form-control" onchange="sortMenuItems()">
-                            <!-- Include "All Categories" option in the HTML -->
-                            <option value="all">All Categories</option>
-                            <!-- Add options dynamically based on available categories -->
-                        </select>
+                        
 
                     <!-- </div> -->
                     
                 
-                    <!-- <div class="category-box"> -->
+                    <div class="category-box">
 
                                     <!-- Sorting Dropdown -->
                                     
-                        <label for="categorySort">Sort by Category:</label>
+                        <label for="categorySort" style="margin: 0 1em;">Sort by Category:</label>
+
+                        <select id="categorySort" class="form-control" onchange="sortMenuItems()" style="margin-right: 1em;">
+                          <!-- Include "All Categories" option in the HTML -->
+                          <option value="all">All Categories</option>
+                          <!-- Add options dynamically based on available categories -->
+                      </select>
                         
                         <span class="category-title" id="selectedCategory"></span> <!-- Added span to display selected category -->
 
-                    <!-- </div> -->
+                    </div>
                     
                 </div>
                 <!-- Display Menu Items -->
                 <div class="row" id="menuItemsContainer">
-                   <img src="/public/src/loading.gif" alt="" id="loadingContainer">
+                  <img src="/public/src/loading.gif" alt="" id="loading-gif">
                     <!-- Menu items will be dynamically added here -->
                 </div>
             </section>

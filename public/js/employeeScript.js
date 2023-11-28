@@ -1,9 +1,7 @@
 async function fetchMenuItems() {
     const fetchMenuItemsUrl = "https://vecchiabackend.azurewebsites.net/menuItems";
 
-    // Display loading state while fetching data
-    const loadingContainer = document.getElementById('loadingContainer');
-    document.getElementById('menu').style.display = 'block';
+    
 
     
     try {
@@ -54,7 +52,7 @@ async function fetchMenuItems() {
         selectedCategorySpan.textContent = 'All Categories';
 
         // Display the menu section
-        document.getElementById('menu').style.display = 'block';
+        document.getElementById('menu').style.display = 'flex';
 
         // Clear the loading state
         loadingContainer.innerHTML = '';
