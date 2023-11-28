@@ -118,6 +118,12 @@ footer {
     transition: top 0.3s ease-in-out; /* Add smooth transition to the top property */
 }
 
+#loading-gif {
+    height: 10vh;
+    display: none;
+
+}
+
 /* Responsive styles */
 @media only screen and (max-width: 1000px) {
     html, body {

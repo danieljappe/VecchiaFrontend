@@ -1,6 +1,11 @@
 async function fetchMenuItems() {
     const fetchMenuItemsUrl = "https://vecchiabackend.azurewebsites.net/menuItems";
 
+    // Display loading state while fetching data
+    const loadingContainer = document.getElementById('loadingContainer');
+    document.getElementById('menu').style.display = 'block';
+
+    
     try {
         const response = await fetch(fetchMenuItemsUrl);
         const menuItems = await response.json();
@@ -13,11 +18,14 @@ async function fetchMenuItems() {
         const menuItemsContainer = document.getElementById('menuItemsContainer');
         menuItemsContainer.innerHTML = '';
 
-        menuItems.forEach(item => {
-            const card = document.createElement('div');
-            card.className = 'col-md-4 mb-4';
+        const menuList = document.createElement('ul');
+        menuList.className = 'menu-list';
 
-            card.innerHTML = `
+        menuItems.forEach(item => {
+            const listItem = document.createElement('li');
+            listItem.className = 'menu-item-container'; // Add a class for the container box
+        
+            listItem.innerHTML = `
                 <div class="card">
                     <!-- <img src="item-image.jpg" class="card-img-top" alt="Item Image"> -->
                     <div class="card-body">
@@ -32,9 +40,11 @@ async function fetchMenuItems() {
                     </div>
                 </div>
             `;
-
-            menuItemsContainer.appendChild(card);
+        
+            menuList.appendChild(listItem);
         });
+
+        menuItemsContainer.appendChild(menuList);
 
         // Update the sorting dropdown options and selected category span
         updateCategoryDropdown();
@@ -45,10 +55,21 @@ async function fetchMenuItems() {
 
         // Display the menu section
         document.getElementById('menu').style.display = 'block';
+
+        // Clear the loading state
+        loadingContainer.innerHTML = '';
     } catch (error) {
         console.error('Error fetching menu items:', error);
+
+        // Display error state
+        const errorContainer = document.getElementById('errorContainer');
+        errorContainer.textContent = 'Error fetching menu items. Please try again later.';
+
+        // Clear the loading state
+        loadingContainer.innerHTML = '';
     }
 }
+
 
 
 
@@ -88,10 +109,10 @@ function sortMenuItems() {
     menuItemsContainer.innerHTML = '';
 
     filteredMenuItems.forEach(item => {
-        const card = document.createElement('div');
-        card.className = 'col-md-4 mb-4';
-
-        card.innerHTML = `
+        const listItem = document.createElement('li');
+            listItem.className = 'menu-item-container'; // Add a class for the container box
+        
+            listItem.innerHTML = `
                 <div class="card">
                     <!-- <img src="item-image.jpg" class="card-img-top" alt="Item Image"> -->
                     <div class="card-body">
@@ -106,9 +127,9 @@ function sortMenuItems() {
                     </div>
                 </div>
             `;
-
-        menuItemsContainer.appendChild(card);
-    });
+        
+            menuItemsContainer.appendChild(listItem);
+        });
 }
 
 
