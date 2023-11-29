@@ -44,6 +44,7 @@ body {
     flex-direction: column;
     align-items: center;
     overflow-x: hidden;
+    background-color: rgb(107, 36, 12);
 }
 
 /* Style the navigation bar */
@@ -85,6 +86,7 @@ header {
 section {
     text-align: center;
     padding: 2em;
+    width: 100%;
 }
 
 .about{
@@ -162,6 +164,66 @@ footer {
     height: 100%;
     background-color: rgba(0,0,0,0.25);
 }
+
+.intro-section {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start; /* Align items to the top */
+    height: 100%;
+    padding: 0;
+    background: linear-gradient(to bottom, #ffcc00, #ff6600); /* Initial gradient colors */
+    transition: background 0.5s ease;
+    flex-direction: column; /* Set to column to stack items vertically */
+}
+
+.content {
+    border: 1px solid #333;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    flex: 1; /* Use flex-grow to fill available space */
+    text-align: center;
+    min-height: 100%; /* Set a minimum height */
+}
+
+.content:nth-child(2) {
+    flex-direction: row-reverse; /* Reverse the flex-direction for the second .content */
+}
+
+.content:nth-child(2) p {
+    flex-direction: row-reverse; /* Reverse the flex-direction for the second .content */
+}
+
+.content img {
+    width: 33%;
+    height: auto;
+    max-width: 100%;
+    display: block;
+    order: 1; /* Display image before text in the HTML order */
+}
+
+.content-box {
+    order: 2;
+    width: 66%;
+    height: 100%;
+    margin: 100px 0;
+    border-left: 1px solid #333;
+    border-right: 1px solid #333;
+    display: flex; /* Added display: flex to make children fill out */
+    flex-direction: column; /* Adjust if necessary */
+}
+
+.content-box h1 {
+    text-align: center;
+    flex-grow: 1;
+}
+
+
+
+
+
+
+
 
 
 

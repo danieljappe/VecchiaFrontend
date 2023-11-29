@@ -83,3 +83,23 @@ document.addEventListener('DOMContentLoaded', function () {
     // Initial display
     showSlide(currentSlide);
 });
+
+document.addEventListener('scroll', function () {
+    // Calculate the scroll progress (a value between 0 and 1)
+    const scrollProgress = window.scrollY / (document.body.scrollHeight - window.innerHeight);
+    
+    // Update the gradient colors based on the scroll progress
+    const color1 = interpolateColor('#ffcc00', '#ff6600', scrollProgress);
+    const color2 = interpolateColor('#ff6600', '#003366', scrollProgress);
+    
+    // Apply the updated gradient to the body background
+    document.body.style.background = `linear-gradient(to bottom, ${color1}, ${color2})`;
+});
+
+// Function to interpolate between two colors based on a progress value
+function interpolateColor(color1, color2, progress) {
+    const r = Math.round(parseInt(color1.substring(1, 3), 16) * (1 - progress) + parseInt(color2.substring(1, 3), 16) * progress);
+    const g = Math.round(parseInt(color1.substring(3, 5), 16) * (1 - progress) + parseInt(color2.substring(3, 5), 16) * progress);
+    const b = Math.round(parseInt(color1.substring(5, 7), 16) * (1 - progress) + parseInt(color2.substring(5, 7), 16) * progress);
+    return `#${(r < 16 ? '0' : '')}${r.toString(16)}${(g < 16 ? '0' : '')}${g.toString(16)}${(b < 16 ? '0' : '')}${b.toString(16)}`;
+}

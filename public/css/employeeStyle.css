@@ -177,6 +177,8 @@ label {
 
 }
 
+
+
 @media screen and (max-width: 600px) {
     .mb-2 {
         flex-direction: column;
