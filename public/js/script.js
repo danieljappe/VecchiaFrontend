@@ -60,3 +60,26 @@ loginForm.addEventListener('submit', function (event) {
         loadingGif.style.display = 'none';
     });
 });
+
+// Slideshow
+
+document.addEventListener('DOMContentLoaded', function () {
+    const slides = document.querySelectorAll('.slide');
+    let currentSlide = 0;
+
+    function showSlide(index) {
+        slides.forEach((slide, i) => {
+            slide.classList.toggle('active', i === index);
+        });
+    }
+
+    function nextSlide() {
+        currentSlide = (currentSlide + 1) % slides.length;
+        showSlide(currentSlide);
+    }
+
+    setInterval(nextSlide, 5000); // Change slide every 5 seconds (adjust as needed)
+
+    // Initial display
+    showSlide(currentSlide);
+});

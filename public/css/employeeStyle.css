@@ -72,8 +72,8 @@ body {
     border: 1px solid black;
 }
 
-.card {
-
+label {
+    display: block;
 }
 
 .form-control {
@@ -137,17 +137,40 @@ body {
     justify-content: center;
 }
 
-.category-title{
+.category-title {
     font-size: 2em;
     font-weight: bold;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
 }
 
-.mb-2  {
+.category-box {
     display: flex;
-    justify-content: space-evenly;
     align-items: center;
-    flex-direction: row;
+    justify-content: space-between;
+    margin: 1em;
+    position: relative; /* Add relative positioning to create a stacking context */
 }
+
+.left-content {
+    display: flex;
+    align-items: center;
+}
+
+.mb-2 {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.left-content button,
+.left-content select {
+    margin: 0 1em;
+}
+
+
 
 #loading-gif {
     height: 10vh;
@@ -191,6 +214,8 @@ body {
     }
     
     .category-title{
+        position: static; 
+        transform: none;
         font-size: 2em;
         font-weight: bold;
     }
