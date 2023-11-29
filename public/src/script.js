@@ -1,4 +1,5 @@
 import { MenuCategory } from "./models/menu_category.js";
+import MenuItem from "./models/menu_item.js";
 import { MenuItemFetcher } from "./utils/fetcher/menu_item_fetcher.js";
 import MenuList from "./utils/menu_list/menu_list.js";
 let lastScrollTop = 0;
@@ -21,7 +22,12 @@ let lastScrollTop = 0;
 //Menu
 //get from DB
 const menuItemFetcher = new MenuItemFetcher();
-const allMenuItems = await menuItemFetcher.getAll();
+//const allMenuItems = await menuItemFetcher.getAll();
+const allMenuItems = [
+    new MenuItem(1, "Salat", "Tomat, Kebab, Dressing", 89.95, "Pizze"),
+    new MenuItem(1, "Salat", "Tomat, Kebab, Dressing", 39.95, "Panini"),
+    new MenuItem(1, "Salat", "Tomat, Kebab, Dressing", 49.95, "Pizze"),
+];
 console.log(allMenuItems);
 
 //sort
@@ -43,6 +49,7 @@ for (let i = 0; i < allMenuItems.length; i++) {
 console.log(menuCategories);
 
 //make 
-const menuList = new MenuList();
+
+const menuList = new MenuList(menuCategories);
 menuList.generateCategoryListView();
 menuList.generateMenuItemListView();

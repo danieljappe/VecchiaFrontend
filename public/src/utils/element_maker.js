@@ -9,9 +9,10 @@ export default class ElementMaker {
     }
 
     //makes a div with a potential class name
-    getDiv = function(className) {
+    getDiv = function(className, id) {
         const div = document.createElement('div');
         className != null? div.className = className : null;
+        id != undefined? div.id = id : null;
         return div;
     }
 
