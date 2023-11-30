@@ -19,15 +19,16 @@ let lastScrollTop = 0;
         lastScrollTop = scrollTop;
     });
 
+
 //Menu
 //get from DB
 const menuItemFetcher = new MenuItemFetcher();
-//const allMenuItems = await menuItemFetcher.getAll();
-const allMenuItems = [
+const allMenuItems = await menuItemFetcher.getAll();
+/*const allMenuItems = [
     new MenuItem(1, "Salat", "Tomat, Kebab, Dressing", 89.95, "Pizze"),
     new MenuItem(1, "Salat", "Tomat, Kebab, Dressing", 39.95, "Panini"),
     new MenuItem(1, "Salat", "Tomat, Kebab, Dressing", 49.95, "Pizze"),
-];
+];*/
 console.log(allMenuItems);
 
 //sort
