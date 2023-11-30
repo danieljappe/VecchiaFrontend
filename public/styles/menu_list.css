@@ -1,0 +1,42 @@
+
+.category-title {
+    display: flex;
+    font-size: 24px;
+    font-weight: 500;
+    margin-bottom: 0px;
+    margin-top: 24px;
+}
+
+.category-card {
+    width: 70vw;
+}
+
+.menu-item-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+.menu-item-card-title {
+    display: flex;
+    font-size: 18px;
+    font-weight: 600;
+    height: 18px;
+    margin-bottom: 4px;
+    margin-top: 0px;
+}
+.menu-item-card-description {
+    display: flex;
+    font-size: 15px;
+    font-weight: 500;
+    color: rgba(0, 0, 0, 0.7);
+    height: 15px;
+    margin: 0px;
+}
+
+.menu-item-card-price {
+    font-size: 18px;
+    font-weight: 500;
+    height: 18px;
+}

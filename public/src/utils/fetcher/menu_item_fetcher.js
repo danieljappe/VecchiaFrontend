@@ -41,7 +41,7 @@ export default class MenuItemFetcher extends Fetcher {
     }
 
     createMenuItemObject = function(response) {
-        return new MenuItem(response.itemId, response.name, response.description, response.price, response.category);
+        return new MenuItem(response.id, response.name, response.description, response.price, response.category);
     }
 
 }
