@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <link rel="icon" href="/public/src/stoneoven.png" type="image/x-icon">
 
-    <link rel="stylesheet" href="styles/style.css">
+    <link rel="stylesheet" href="styles/indexStyle.css">
     <link rel="stylesheet" href="styles/mapsAPIstyle.css">
     <link rel="stylesheet" href="styles/menu_list.css">
 
@@ -28,6 +28,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
     <script src="src/script.js" defer type="module"></script>
+    <script src="js/menu_list.js" defer type="module"></script>
 
   </head>
   <body>
@@ -74,9 +75,10 @@
         
         
     </div>
-    <div class="color-overlay d-flex justify-content-center align-items-center">
+    <div class="color-overlay d-flex flex-column justify-content-center align-items-center" style="">
         <h1>Vecchia Maniera</h1>
-        
+        <div style="height: 48px;"></div>
+        <a href="tel:+4540384932" class="call-us-title">Ring til os her</a>
     </div>
 </div>
 
@@ -131,8 +133,13 @@
   </div>
 </div>
 
+<!-- Menu -->
 <section class="menu-list" style="margin-top: 72px">
-    <h2 class="text-center mb-4">Our menu</h2>
+    <div class="menu-nav">
+      <div style="width: 24px;"></div>
+      <h2 class="">Menu</h2> 
+      <a href="/public/src/menu_list_print.html" id="desktopLink">Print</a>
+    </div>
     <div id="menu">
         <!-- forEach -->
     </div>

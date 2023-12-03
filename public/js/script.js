@@ -84,17 +84,7 @@ document.addEventListener('DOMContentLoaded', function () {
     showSlide(currentSlide);
 });
 
-document.addEventListener('scroll', function () {
-    // Calculate the scroll progress (a value between 0 and 1)
-    const scrollProgress = window.scrollY / (document.body.scrollHeight - window.innerHeight);
-    
-    // Update the gradient colors based on the scroll progress
-    const color1 = interpolateColor('#ffcc00', '#ff6600', scrollProgress);
-    const color2 = interpolateColor('#ff6600', '#003366', scrollProgress);
-    
-    // Apply the updated gradient to the body background
-    document.body.style.background = `linear-gradient(to bottom, ${color1}, ${color2})`;
-});
+
 
 // Function to interpolate between two colors based on a progress value
 function interpolateColor(color1, color2, progress) {

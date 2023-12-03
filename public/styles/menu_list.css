@@ -3,15 +3,45 @@
     display: flex;
     font-size: 24px;
     font-weight: 500;
-    margin-bottom: 0px;
+    margin-bottom: 8px;
     margin-top: 24px;
 }
 
+desktopLink {
+    display: inline; /* or block, depending on your layout */
+}
+
+/* Media query for devices with a maximum width of 767 pixels (typical for mobile devices) */
+@media only screen and (max-width: 767px) {
+    #desktopLink {
+        opacity: 0;
+    }
+}
+
+.menu-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 92.5vw;
+}
+
+.menu-title {
+    font-size: large;
+}
+
 .category-card {
-    width: 70vw;
+    width: 90vw;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    background-color: transparent;
+}
+
+.menu-item-card:hover {
+    background-color: rgba(0, 0, 0, 0.08);
+    padding-bottom: 8px;
+    padding-left: 4px;
+    padding-right: 4px;
 }
 
 .menu-item-card {
@@ -24,7 +54,7 @@
 .menu-item-card-title {
     display: flex;
     font-size: 18px;
-    font-weight: 600;
+    font-weight: 500;
     height: 18px;
     margin-bottom: 4px;
     margin-top: 0px;
@@ -42,6 +72,7 @@
     font-size: 18px;
     font-weight: 500;
     height: 18px;
+    margin-bottom: 0px;
 }
 
 #menu {
