@@ -19,6 +19,7 @@
         <a href="#" onclick="openSection('home')">Home</a>
         <a href="#" onclick="openSection('menu')">Menu</a>
         <a href="#" onclick="openSection('catering-orders')">Catering Orders</a>
+        <a href="#" onclick="openSection('logout')">Logout</a>
     </div>
 
     <!-- Page Content -->
@@ -64,18 +65,35 @@
 </div>
 
 
-        <!-- Catering Orders Section -->
-        <div class="content-container">
-            <section id="catering-orders" style="display:none;">
-                <h2>Catering Orders</h2>
-                <!-- Add your functionality for catering orders here -->
-                <!-- Example: -->
-                <p>No catering orders currently.</p>
+<!-- Catering Orders Section -->
+<div class="content-container">
+    <section id="catering-orders" style="display:none;">
+        <h2>Catering Orders</h2>
+        <!-- Add your functionality for catering orders here -->
+        <!-- Example: -->
+        <p>No catering orders currently.</p>
 
-                <p>Evt calender her (FullCalendar.js)</p>
-            </section>
-        </div>
-    </div>
+        <p>Evt calender her (FullCalendar.js)</p>
+    </section>
+</div>
+
+
+<!-- Logout Section -->
+<div class="content-container">
+  <section id="logout" style="display:none;">
+      <h2>Logout</h2>
+      <p>Are you sure you want to logout?</p>
+      <button class="btn btn-primary" onclick="logout()">Logout</button>
+  </section>
+</div>
+
+
+</div>
+
+
+   
+
+    
 
     <!-- Add Item Modal -->
     <div class="modal fade" id="addItemModal" tabindex="-1" role="dialog" aria-labelledby="addItemModalLabel" aria-hidden="true">

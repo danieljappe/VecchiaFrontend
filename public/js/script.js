@@ -4,6 +4,9 @@ const loginButton = document.getElementById('loginButton');
 const loadingGif = document.getElementById('loading-gif');
 const errorMessage = document.getElementById('error-message');
 
+const employeeData = JSON.parse(window.sessionStorage.getItem('employee'));
+console.log('Employee Data in index.html(should be null):', employeeData);
+
 loginForm.addEventListener('submit', function (event) {
     event.preventDefault(); // Prevent the default form submission
 

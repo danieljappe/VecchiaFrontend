@@ -141,6 +141,15 @@ document.addEventListener("DOMContentLoaded", function () {
 
 // Fetch menu items when the page is loaded
 document.addEventListener('DOMContentLoaded', function () {
+    // Handle delete button click
+    document.getElementById('menuItemsContainer').addEventListener('click', function (event) {
+        if (event.target.classList.contains('btn-danger')) {
+            const itemId = event.target.closest('.card').dataset.itemId;
+            deleteItem(itemId);
+        }
+    });
+
+    // Fetch menu items only if the initial section is "menu"
     const employeeData = JSON.parse(window.sessionStorage.getItem('employee'));
     console.log('Employee Data in employee.html:', employeeData);
 
@@ -269,48 +278,26 @@ document.getElementById('editItemForm').addEventListener('submit', function (eve
 });
 
 
+// DELETE
 
-            // DELETE
+async function deleteItem(itemId) {
+    try {
+        const deleteUrl = `https://vecchiabackend.azurewebsites.net/menuItems/delete/${itemId}`;
+        const response = await fetch(deleteUrl, {
+            method: 'DELETE',
+        });
 
-
-            // Function to delete a menu item
-            async function deleteItem(itemId) {
-                try {
-                    const deleteUrl = `https://vecchiabackend.azurewebsites.net/menuItems/delete/${itemId}`;
-                    const response = await fetch(deleteUrl, {
-                        method: 'DELETE',
-                    });
-            
-                    if (response.ok) {
-                        console.log(`Item with ID ${itemId} deleted successfully.`);
-                        // Optionally update the menu items
-                        fetchMenuItems();
-                    } else {
-                        console.error(`Error deleting item with ID ${itemId}.`);
-                    }
-                } catch (error) {
-                    console.error('Error deleting item:', error);
-                }
-            }
-            
-
-// ... (your existing code)
-
-document.addEventListener('DOMContentLoaded', function () {
-    // ... (your existing code)
-
-    // Handle delete button click
-    document.getElementById('menuItemsContainer').addEventListener('click', function (event) {
-        if (event.target.classList.contains('btn-danger')) {
-            const itemId = event.target.closest('.card').dataset.itemId;
-            deleteItem(itemId);
+        if (response.ok) {
+            console.log(`Item with ID ${itemId} deleted successfully.`);
+            // Optionally update the menu items
+            fetchMenuItems();
+        } else {
+            console.error(`Error deleting item with ID ${itemId}.`);
         }
-    });
-
-    // ... (your existing code)
-});
-
-// ... (your existing code)
+    } catch (error) {
+        console.error('Error deleting item:', error);
+    }
+}
 
 // Update the HTML with the fetched menu items
 const menuItemsContainer = document.getElementById('menuItemsContainer');
@@ -370,7 +357,7 @@ function toggleNavVisibility() {
 }
 
 function openSection(sectionId) {
-    var sections = ["home", "menu", "catering-orders"];
+    var sections = ["home", "menu", "catering-orders", "logout"];
     var sidebar = document.getElementById("sidebar");
 
     // Hide all sections
@@ -386,7 +373,14 @@ function openSection(sectionId) {
         console.log("Fetching menu items...");
         fetchMenuItems();
     }
+
+    
     // Do not close the sidebar here
+}
+
+function logout() {
+    window.sessionStorage.removeItem("employee");
+    window.location.href = "../index.html";
 }
 
 
