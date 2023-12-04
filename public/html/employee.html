@@ -7,7 +7,7 @@
     <title>Employee Page</title>
     <!-- Bootstrap CSS -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="/public/css/employeeStyle.css">
+    <link rel="stylesheet" href="/public/styles/employeeStyle.css">
 
 </head>
 
@@ -30,6 +30,9 @@
             <section id="home">
                 <h2>Welcome to the Employee Page!</h2>
                 <p>This is the home section.</p>
+                  <div class="employee-info">
+                    <!-- JS -->
+                  </div>
             </section>
         </div>
 
@@ -50,10 +53,11 @@
           </div>
           <span class="category-title" id="selectedCategory"></span> <!-- Added span to display selected category -->
       </div>
+      <img src="/public/src/loading.gif" alt="" id="loading-gif">
 
       <!-- Display Menu Items -->
       <div class="row" id="menuItemsContainer">
-          <img src="/public/src/loading.gif" alt="" id="loading-gif">
+          
           <!-- Menu items will be dynamically added here -->
       </div>
   </section>

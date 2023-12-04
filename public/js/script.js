@@ -37,10 +37,13 @@ loginForm.addEventListener('submit', function (event) {
             }),
         }),
     ])
-    .then(response => {
+    .then(async (response) => {
         console.log(response);
         if (response.ok) {
             console.log('Login successful');
+            const employeeData = await response.json(); // Wait for the JSON data
+            console.log('Employee Data:', employeeData); // Log the data
+            window.sessionStorage.setItem('employee', JSON.stringify(employeeData));
             // Successful login, redirect to the specified location
             window.location.href = "html/employee.html";
         } else {

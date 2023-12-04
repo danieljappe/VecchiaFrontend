@@ -13,6 +13,7 @@ async function fetchMenuItems() {
         allCategories = [...new Set(menuItems.map(item => item.category))]; // Get unique categories
 
         // Update the HTML with the fetched menu items
+        document.getElementById("loading-gif").style.display = "none";
         const menuItemsContainer = document.getElementById('menuItemsContainer');
         menuItemsContainer.innerHTML = '';
 
@@ -140,58 +141,71 @@ document.addEventListener("DOMContentLoaded", function () {
 
 // Fetch menu items when the page is loaded
 document.addEventListener('DOMContentLoaded', function () {
-    // Ensure the toggle button is initially hidden
-    var toggleBtn = document.getElementById("toggle-btn");
-    toggleBtn.style.opacity = 0;
+    const employeeData = JSON.parse(window.sessionStorage.getItem('employee'));
+    console.log('Employee Data in employee.html:', employeeData);
 
-    // Fetch menu items only if the initial section is "menu"
-    if (window.location.hash === "#menu") {
-        fetchMenuItems();
+    const sectionElement = document.querySelector('.employee-info');
+
+    if (employeeData) {
+        sectionElement.innerHTML = `
+        <h1>Logged in as: ${employeeData.firstName} ${employeeData.lastName}</h1>
+        <p><strong>Employee ID:</strong> ${employeeData.employeeID}</p>
+        <p><strong>Is admin:</strong> ${employeeData.admin ? 'Yes' : 'No'}</p>
+        <p><strong>Email:</strong> ${employeeData.email}</p>
+        <p><strong>Phone:</strong> ${employeeData.phone}</p>
+        `;
+    } else {
+        // Handle the case when employeeData is null or undefined
+        sectionElement.innerHTML = `<h1>No employee data found!</h1>`;
     }
+        // Ensure the toggle button is initially hidden
+        var toggleBtn = document.getElementById("toggle-btn");
+        toggleBtn.style.opacity = 0;
 
-    // Handle form submission
-    document.getElementById('addItemForm').addEventListener('submit', function (event) {
-        event.preventDefault();
-
-        // Get form values
-        const itemName = document.getElementById('itemName').value;
-        const itemDescription = document.getElementById('itemDescription').value;
-        const itemPrice = document.getElementById('itemPrice').value;
-        const itemCategory = document.getElementById('itemCategory').value;
-
-        // Create a new menu item object
-        const newItem = {
-            name: itemName,
-            description: itemDescription,
-            price: parseFloat(itemPrice),
-            category: itemCategory
-        };
-
-        // Make a POST request to add the new item
-        fetch('https://vecchiabackend.azurewebsites.net/menuItems/create', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(newItem)
-        })
-        .then(response => response.json())
-        .then(createdItem => {
-            // Handle the response (e.g., update UI, close modal)
-            console.log('Item created:', createdItem);
-
-            // Optionally update the menu items
+        // Fetch menu items only if the initial section is "menu"
+        if (window.location.hash === "#menu") {
             fetchMenuItems();
+        }
 
-            // Close the modal
-            $('#addItemModal').modal('hide');
-        })
-        .catch(error => {
-            console.error('Error adding item:', error);
+        // Handle form submission
+        document.getElementById('addItemForm').addEventListener('submit', function (event) {
+            event.preventDefault();
+        
+            const itemName = document.getElementById('itemName').value;
+            const itemDescription = document.getElementById('itemDescription').value;
+            const itemPrice = document.getElementById('itemPrice').value;
+            const itemCategory = document.getElementById('itemCategory').value;
+
+            const newItem = {
+                name: itemName,
+                description: itemDescription,
+                price: parseFloat(itemPrice),
+                category: itemCategory
+            };
+
+            fetch('https://vecchiabackend.azurewebsites.net/menuItems/create', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(newItem)
+            })
+            .then(response => response.json())
+            .then(createdItem => {
+                console.log('Item created:', createdItem);
+
+                // update the menu items
+                fetchMenuItems();
+
+                // Close the modal
+                $('#addItemModal').modal('hide');
+            })
+            .catch(error => {
+                console.error('Error adding item:', error);
+            });
         });
-    });
 
-});
+    });
 
 function editItem(itemId, itemName, itemDescription, itemPrice, itemCategory) {
     console.log('Received itemId:', itemId);
@@ -365,7 +379,7 @@ function openSection(sectionId) {
     }
 
     // Display the selected section
-    document.getElementById(sectionId).style.display = "block";
+    document.getElementById(sectionId).style.display = "flex";
 
     // Fetch menu items only if the selected section is "menu"
     if (sectionId === "menu") {
@@ -374,3 +388,5 @@ function openSection(sectionId) {
     }
     // Do not close the sidebar here
 }
+
+
