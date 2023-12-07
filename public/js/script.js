@@ -91,11 +91,20 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 
+// Function to handle the intersection observer callback
+function handleIntersection(entries, observer) {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('slide-in'); // Add a class to trigger the sliding animation
+        observer.unobserve(entry.target); // Stop observing once the animation is applied
+      }
+    });
+  }
 
-// Function to interpolate between two colors based on a progress value
-function interpolateColor(color1, color2, progress) {
-    const r = Math.round(parseInt(color1.substring(1, 3), 16) * (1 - progress) + parseInt(color2.substring(1, 3), 16) * progress);
-    const g = Math.round(parseInt(color1.substring(3, 5), 16) * (1 - progress) + parseInt(color2.substring(3, 5), 16) * progress);
-    const b = Math.round(parseInt(color1.substring(5, 7), 16) * (1 - progress) + parseInt(color2.substring(5, 7), 16) * progress);
-    return `#${(r < 16 ? '0' : '')}${r.toString(16)}${(g < 16 ? '0' : '')}${g.toString(16)}${(b < 16 ? '0' : '')}${b.toString(16)}`;
-}
+  // Create an intersection observer targeting the elements with the 'about-box' class
+  const observer = new IntersectionObserver(handleIntersection, { threshold: 0.5 });
+
+  // Get all elements with the 'about-box' class and observe each one
+  document.querySelectorAll('.about-box').forEach(box => {
+    observer.observe(box);
+  });

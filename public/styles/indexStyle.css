@@ -138,6 +138,10 @@ section {
     justify-content: space-between;
     align-items: center;
     height: 40vh;
+    opacity: 0; /* Start with opacity set to 0 for the fade-in effect */
+  transform: translateX(-50px); /* Start with a slight left translation for the sliding effect */
+  transition: opacity 0.8s ease, transform 0.8s ease; /* Transition properties for the fade and slide effect */
+
   }
 
   .about-box:nth-child(even) {
@@ -158,7 +162,10 @@ section {
     line-height: 1.75;
   }
   
-  
+  .about-box.slide-in {
+    opacity: 1; /* Fade in when the element is in view */
+    transform: translateX(0); /* Slide in from the left when the element is in view */
+  }
   
 
 
