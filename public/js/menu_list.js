@@ -6,8 +6,8 @@ import MenuList from "../src/utils/menu_list/menu_list.js";
 //Menu
 //get from DB
 const menuItemFetcher = new MenuItemFetcher();
-//const allMenuItems = await menuItemFetcher.getAll();
-const allMenuItems = [
+const allMenuItems = await menuItemFetcher.getAll();
+/*const allMenuItems = [
     // Anti Pasti
     new MenuItem(1, 'Bruschetta Classica', 'Ristet brød m. tomat, mozzarella-ost, basilikum, hvidløg og rødløg', 50.0, 'Anti Pasti'),
     new MenuItem(2, 'Vitello tonnato', 'Kalvekød i skiver m. tunsause og kapers', 95.0, 'Anti Pasti'),
@@ -50,7 +50,7 @@ const allMenuItems = [
     // Til Dessert
     new MenuItem(32, 'Tiramisu Vecchia Maniera', 'Veneziansk kage med m. mascarponecreme', 50.0, 'Til Dessert'),
     new MenuItem(33, 'Originale Italienske Is', 'Mange varianter', 50.0, 'Til Dessert')
-];
+];*/
 console.log(allMenuItems);
 
 //sort
