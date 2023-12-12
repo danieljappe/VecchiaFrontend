@@ -100,11 +100,16 @@ function handleIntersection(entries, observer) {
       }
     });
   }
-
-  // Create an intersection observer targeting the elements with the 'about-box' class
-  const observer = new IntersectionObserver(handleIntersection, { threshold: 0.5 });
-
-  // Get all elements with the 'about-box' class and observe each one
+  
+  // Create an intersection observer for '.about-box' elements
+  const aboutBoxObserver = new IntersectionObserver(handleIntersection, { threshold: 0.5 });
   document.querySelectorAll('.about-box').forEach(box => {
-    observer.observe(box);
+    aboutBoxObserver.observe(box);
   });
+  
+  // Create a separate intersection observer for '.buffet-item' elements
+  const buffetObserver = new IntersectionObserver(handleIntersection, { threshold: 0.5 });
+  document.querySelectorAll('.buffet-item').forEach(item => {
+    buffetObserver.observe(item);
+  });
+  

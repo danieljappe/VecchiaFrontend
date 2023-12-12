@@ -367,3 +367,104 @@ footer {
 }
 
 
+.accordion {
+    width: 50%;
+    display: flex;
+    margin-left: auto;
+    margin-right: auto;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.accordion-item {
+    margin-bottom: 1em;
+}
+
+.accordion-title {
+  width: 100%;
+  text-align: center;
+  background-color: #eee;
+  margin: 0;
+  padding: 1vh;
+}
+.accordion-content {
+  padding: 10px;
+  background-color: #f8f9fa;
+  display: none; /* Hide by default */
+  overflow: hidden;
+  transition: max-height 0.2s ease-out;
+}
+.accordion-item button h2{
+    text-align: center;
+}
+
+
+
+.buffet {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+  }
+  
+  .buffet-item {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 20px; /* Space between items */
+  }
+  
+  .buffet-item.reverse {
+    flex-direction: row-reverse;
+  }
+  
+  .buffet-image {
+    width: 50vh; /* Adjust image width as necessary */
+    margin: 10px; /* Space between image and accordion */
+  }
+  
+  .accordion {
+    width: 50%; /* Adjust accordion width as necessary */
+    margin: 10px; /* Space between image and accordion */
+  }
+
+  .accordion-content {
+    display: block;
+  }
+  
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+    .buffet-item,
+    .buffet-item.reverse {
+      flex-direction: column;
+    }
+  
+    .buffet-image,
+    .accordion {
+      width: 100%;
+      margin: 0 0 20px 0; /* Adjust margin as necessary */
+    }
+  }
+
+  .slide-in {
+    animation: slideInAnimation 1s forwards ease-out;
+  }
+  
+  @keyframes slideInAnimation {
+    0% {
+      opacity: 0;
+      transform: translateX(-20px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+  
+  /* Ensure the buffet items are initially set up for the animation */
+  .buffet-item {
+    opacity: 0; /* Start with the items invisible */
+    transition: opacity 0.3s ease-in-out;
+  }
