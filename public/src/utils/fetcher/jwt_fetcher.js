@@ -8,7 +8,7 @@ export default class JWTFetcher extends Fetcher {
         this.url = this.baseURL + "/token";
     }
 
-    getToken = async function(employee) { //requires a Order class -> ../models/menu_item.js
+    getToken = async function(employee) {
         try {
             const jsonObject = {
                 "username" : employee.email,
@@ -16,8 +16,7 @@ export default class JWTFetcher extends Fetcher {
             };
             const response = await this.post(this.url, jsonObject);
             if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
-            const json = await response.json();
-            return json;
+            return response;
         } catch (error) {
             console.error('Getting Token Error:', error);
             throw error;

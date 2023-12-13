@@ -14,7 +14,6 @@ export default class Fetcher {
             });
         } catch(error) {
             console.error('Fetch error:', error);
-            throw error;
         }
     }
 
