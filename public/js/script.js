@@ -1,3 +1,5 @@
+import {JWTFetcher} from "../src/utils/fetcher/jwt_fetcher";
+
 const loginEndpoint = "https://vecchiabackend.azurewebsites.net/employees/login";
 const loginForm = document.getElementById('loginForm');
 const loginButton = document.getElementById('loginButton');
@@ -44,7 +46,7 @@ loginForm.addEventListener('submit', function (event) {
         console.log(response);
         if (response.ok) {
             console.log('Login successful');
-            const employeeData = await response.json(); // Wait for the JSON data
+            const employeeData = await response.json();
             console.log('Employee Data:', employeeData); // Log the data
             window.sessionStorage.setItem('employee', JSON.stringify(employeeData));
             // Successful login, redirect to the specified location
