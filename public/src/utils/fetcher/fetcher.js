@@ -2,16 +2,20 @@ export default class Fetcher {
     baseURL;
 
     constructor() {
-        this.baseURL = "https://vecchiabackend.azurewebsites.net";   
-        //this.baseURL = "https://localhost:8080";   
+        this.baseURL = "https://vecchiabackend.azurewebsites.net";     
     }
 
     post = async function(url, json) {
-        return await fetch(url, {
-            method: 'POST',
-            headers: {  'Content-Type': 'application/json'},
-            body: JSON.stringify(json),
-        });
+        try {
+            return await fetch(url, {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify(json),
+            });
+        } catch(error) {
+            console.error('Fetch error:', error);
+            throw error;
+        }
     }
 
     // Fetch data from URL
