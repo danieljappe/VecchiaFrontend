@@ -1,5 +1,4 @@
 import { MenuCategory } from "../src/models/menu_category.js";
-import MenuItem from "../src/models/menu_item.js";
 import { MenuItemFetcher } from "../src/utils/fetcher/menu_item_fetcher.js";
 import MenuList from "../src/utils/menu_list/menu_list.js";
 
