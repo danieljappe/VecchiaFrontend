@@ -120,11 +120,17 @@ function handleIntersection(entries, observer) {
     });
   }
   
-  // Create an intersection observer for '.about-box' elements
-  const aboutBoxObserver = new IntersectionObserver(handleIntersection, { threshold: 0.5 });
-  document.querySelectorAll('.about-box').forEach(box => {
+  if (window.innerWidth < 768) {
+      // Create an intersection observer for '.about-box' elements
+    const aboutBoxObserver = new IntersectionObserver(handleIntersection, { threshold: 0.5 });
+    document.querySelectorAll('.about-box').forEach(box => {
     aboutBoxObserver.observe(box);
   });
+  } else {
+    document.querySelectorAll('.about-box').forEach(box => {
+        box.style.display = 'block';
+    })
+  }
   
   // Create a separate intersection observer for '.buffet-item' elements
   const buffetObserver = new IntersectionObserver(handleIntersection, { threshold: 0.5 });
