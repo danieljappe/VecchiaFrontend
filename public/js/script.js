@@ -1,5 +1,3 @@
-import {JWTFetcher} from "../src/utils/fetcher/jwt_fetcher";
-
 const loginEndpoint = "https://vecchiabackend.azurewebsites.net/employees/login";
 const loginForm = document.getElementById('loginForm');
 const loginButton = document.getElementById('loginButton');
@@ -46,7 +44,7 @@ loginForm.addEventListener('submit', function (event) {
         console.log(response);
         if (response.ok) {
             console.log('Login successful');
-            const employeeData = await response.json();
+            const employeeData = await response.json(); // Wait for the JSON data
             console.log('Employee Data:', employeeData); // Log the data
             window.sessionStorage.setItem('employee', JSON.stringify(employeeData));
             // Successful login, redirect to the specified location
@@ -103,21 +101,22 @@ function handleIntersection(entries, observer) {
     });
   }
   
-  if (window.innerWidth < 768) {
-      // Create an intersection observer for '.about-box' elements
-    const aboutBoxObserver = new IntersectionObserver(handleIntersection, { threshold: 0.5 });
-    document.querySelectorAll('.about-box').forEach(box => {
+  // Create an intersection observer for '.about-box' elements
+  const aboutBoxObserver = new IntersectionObserver(handleIntersection, { threshold: 0.5 });
+  document.querySelectorAll('.about-box').forEach(box => {
     aboutBoxObserver.observe(box);
   });
-  } else {
-    document.querySelectorAll('.about-box').forEach(box => {
-        box.style.display = 'block';
-    })
-  }
   
-  // Create a separate intersection observer for '.buffet-item' elements
-  const buffetObserver = new IntersectionObserver(handleIntersection, { threshold: 0.5 });
-  document.querySelectorAll('.buffet-item').forEach(item => {
+  if (window.innerWidth > 768) {
+    // Create a separate intersection observer for '.buffet-item' elements
+    const buffetObserver = new IntersectionObserver(handleIntersection, { threshold: 0.5 });
+    document.querySelectorAll('.buffet-item').forEach(item => {
     buffetObserver.observe(item);
   });
+  } else {
+    console.log("innerWidth = " + window.innerWidth)
+    document.querySelectorAll('.buffet-item').forEach(buffetItem => {
+        buffetItem.style.opacity = 100
+    });
+  }
   
