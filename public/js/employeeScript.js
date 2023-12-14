@@ -210,6 +210,7 @@ document.addEventListener('DOMContentLoaded', function () {
             fetch('https://vecchiabackend.azurewebsites.net/menuItems/create', {
                 method: 'POST',
                 headers: {
+                    'Authorization': `Bearer ${window.sessionStorage.getItem('token')}`,
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify(newItem)
@@ -266,19 +267,25 @@ document.getElementById('editItemForm').addEventListener('submit', function (eve
     };
 
     // Make a PUT request to update the item
+    const token = window.sessionStorage.getItem('token');
+    console.log(token);
+    console.log(editedItem);
     let editUrl = 'https://vecchiabackend.azurewebsites.net/menuItems/update/' + itemId;
+    //let editUrl = `http://localhost:8080/menuItems/update/${itemId}`;
+
     fetch(editUrl, {
         method: 'PUT',
         headers: {
+            'Authorization': `Bearer ${token}`,
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify(editedItem)
+        body: JSON.stringify(editedItem),
     })
-    .then(response => {
+    .then(async response => {
         console.log('Response:', response);
-        return response.json();
+        return await response.json();
     })
-    .then(updatedItem => {
+    .then(async updatedItem => {
         console.log('Item updated:', updatedItem);
 
         // Optionally update the menu items
@@ -296,9 +303,13 @@ document.getElementById('editItemForm').addEventListener('submit', function (eve
 // DELETE
 async function deleteItem(itemId) {
     try {
+        const token = window.sessionStorage.getItem('token');
         const deleteUrl = `https://vecchiabackend.azurewebsites.net/menuItems/delete/${itemId}`;
         const response = await fetch(deleteUrl, {
             method: 'DELETE',
+            headers: {
+                'Authorization': `Bearer ${token}`,
+            },
         });
 
         if (response.ok) {
