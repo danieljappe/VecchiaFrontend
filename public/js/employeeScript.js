@@ -253,19 +253,19 @@ document.getElementById('editItemForm').addEventListener('submit', function (eve
     console.log(token);
     console.log(editedItem);
     let editUrl = 'https://vecchiabackend.azurewebsites.net/menuItems/update/' + itemId;
-    //let editUrl = `https://localhost:8080/menuItems/update/${itemId}`;
+    //let editUrl = `http://localhost:8080/menuItems/update/${itemId}`;
+
     fetch(editUrl, {
         method: 'PUT',
         headers: {
             'Authorization': `Bearer ${token}`,
-            'Content-Type': 'application/json',
+            'Content-Type': 'application/json'
         },
         body: JSON.stringify(editedItem),
     })
     .then(async response => {
         console.log('Response:', response);
-        console.log('Response:', response.text());
-        return response.json();
+        return await response.json();
     })
     .then(async updatedItem => {
         console.log('Item updated:', updatedItem);
@@ -285,9 +285,13 @@ document.getElementById('editItemForm').addEventListener('submit', function (eve
 // DELETE
 async function deleteItem(itemId) {
     try {
+        const token = window.sessionStorage.getItem('token');
         const deleteUrl = `https://vecchiabackend.azurewebsites.net/menuItems/delete/${itemId}`;
         const response = await fetch(deleteUrl, {
             method: 'DELETE',
+            headers: {
+                'Authorization': `Bearer ${token}`,
+            },
         });
 
         if (response.ok) {
