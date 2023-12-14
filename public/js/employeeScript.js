@@ -66,9 +66,6 @@ async function fetchMenuItems() {
     }
 }
 
-
-
-
 // Function to update the sorting dropdown options
 function updateCategoryDropdown() {
     const categorySortDropdown = document.getElementById('categorySort');
@@ -149,6 +146,27 @@ document.addEventListener('DOMContentLoaded', function () {
     // Fetch menu items only if the initial section is "menu"
     const employeeData = JSON.parse(window.sessionStorage.getItem('employee'));
     console.log('Employee Data in employee.html:', employeeData);
+
+
+    // Employee section
+    if (employeeData) {
+        populateEmployeeForm(employeeData);
+
+        // Show admin view for admins
+        if (employeeData.isAdmin) {
+            document.getElementById("adminView").style.display = 'block';
+            // Optionally, fetch and display all employees data
+            // fetchAllEmployees();
+        }
+
+        // Handle form submission for employee update
+        document.getElementById("employeeForm").onsubmit = function(event) {
+            event.preventDefault();
+            updateEmployee();
+        };
+    }
+
+    // Home section
 
     const sectionElement = document.querySelector('.employee-info');
 
@@ -353,7 +371,7 @@ function toggleNavVisibility() {
 }
 
 function openSection(sectionId) {
-    var sections = ["home", "menu", "catering-orders", "logout"];
+    var sections = ["home", "menu", "employee", "logout"];
     var sidebar = document.getElementById("sidebar");
 
     // Hide all sections
@@ -369,9 +387,6 @@ function openSection(sectionId) {
         console.log("Fetching menu items...");
         fetchMenuItems();
     }
-
-    
-    // Do not close the sidebar here
 }
 
 function logout() {
@@ -380,4 +395,58 @@ function logout() {
     window.location.href = "../index.html";
 }
 
+function populateEmployeeForm(data) {
+    document.getElementById("employeeID").value = data.employeeID;
+    document.getElementById("firstName").value = data.firstName || '';
+    document.getElementById("lastName").value = data.lastName || '';
+    document.getElementById("email").value = data.email || '';
+    document.getElementById("phone").value = data.phone || '';
+
+    // Ensure isAdmin is treated as a boolean
+    const isAdminFlag = typeof data.isAdmin === 'boolean' ? data.isAdmin : (data.isAdmin === 'true');
+    document.getElementById("isAdmin").checked = isAdminFlag;
+}
+
+function updateEmployee() {
+    let updatedData = {
+        firstName: document.getElementById("firstName").value,
+        lastName: document.getElementById("lastName").value,
+        email: document.getElementById("email").value,
+        phone: document.getElementById("phone").value,
+        password: document.getElementById("password").value
+    };
+
+    const employeeId = document.getElementById("employeeID").value;
+    const updateEmployeeUrl = "https://vecchiabackend.azurewebsites.net/employees/update/" + employeeId;
+
+    fetch(updateEmployeeUrl, {
+        method: 'PUT', // or 'POST', depending on your backend setup
+        headers: {
+            'Authorization': 'Bearer ${token}',
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(updatedData)
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok ' + response.statusText);
+        }
+        return response.json();
+    })
+    .then(updatedEmployee => {
+        console.log('Employee updated:', updatedEmployee);
+        // Handle successful response here, like updating the UI or showing a success message
+    })
+    .catch(error => {
+        console.error('Error updating employee:', error);
+        // Handle errors here, like showing an error message to the user
+    });
+}
+
+
+function fetchAllEmployees() {
+    // AJAX request to get all employees data
+    console.log("Fetching all employees...");
+    // On success, populate #employeeList
+}
 
