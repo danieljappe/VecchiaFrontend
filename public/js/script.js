@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-=======
-
->>>>>>> a751ad5846a22974d067195798cb3b02eb8d7302
 const loginEndpoint = "https://vecchiabackend.azurewebsites.net/employees/login";
 //const loginEndpoint = "https://localhost:8080/employees/login";
 const loginForm = document.getElementById('loginForm');
@@ -124,21 +120,45 @@ function handleIntersection(entries, observer) {
   }
   
   // Create an intersection observer for '.about-box' elements
-  const aboutBoxObserver = new IntersectionObserver(handleIntersection, { threshold: 0.5 });
+  const aboutBoxObserver = new IntersectionObserver(handleIntersection, { threshold: 0.2 });
   document.querySelectorAll('.about-box').forEach(box => {
     aboutBoxObserver.observe(box);
   });
   
-  if (window.innerWidth > 768) {
     // Create a separate intersection observer for '.buffet-item' elements
-    const buffetObserver = new IntersectionObserver(handleIntersection, { threshold: 0.5 });
+    const buffetObserver = new IntersectionObserver(handleIntersection, { threshold: 0.1 });
     document.querySelectorAll('.buffet-item').forEach(item => {
     buffetObserver.observe(item);
   });
-  } else {
-    console.log("innerWidth = " + window.innerWidth)
-    document.querySelectorAll('.buffet-item').forEach(buffetItem => {
-        buffetItem.style.opacity = 100
-    });
-  }
+
+  // Send buffet email
+  document.getElementById('emailButton').addEventListener('click', function() {
+    var buffetOption = document.querySelector('input[name="buffetOption"]:checked').value;
+    var name = document.getElementById('name').value;
+    // TODO: Change email to vecchia
+    var email = "danieljappe@gmail.com"
+    var phone = document.getElementById('phone').value;
+    var address = document.getElementById('address').value;
   
+    var emailBody = 
+      'Buffet Option: ' + encodeURIComponent(buffetOption) + '%0D%0A' +
+      'Name: ' + encodeURIComponent(name) + '%0D%0A' +
+      'Phone Number: ' + encodeURIComponent(phone) + '%0D%0A' +
+      'Address: ' + encodeURIComponent(address);
+  
+    var mailtoLink = 'mailto:' + encodeURIComponent(email) + 
+                     '?subject=' + encodeURIComponent('Buffet Booking') + 
+                     '&body=' + emailBody;
+  
+    window.location.href = mailtoLink;
+  });
+  
+  window.addEventListener('scroll', function() {
+    var navbarToggler = document.querySelector('.navbar-toggler');
+    var isNavbarExpanded = navbarToggler.getAttribute('aria-expanded') === 'true';
+
+    if (isNavbarExpanded) {
+        navbarToggler.click();
+    }
+});
+
