@@ -1,4 +1,9 @@
+<<<<<<< HEAD
+=======
+
+>>>>>>> a751ad5846a22974d067195798cb3b02eb8d7302
 const loginEndpoint = "https://vecchiabackend.azurewebsites.net/employees/login";
+//const loginEndpoint = "https://localhost:8080/employees/login";
 const loginForm = document.getElementById('loginForm');
 const loginButton = document.getElementById('loginButton');
 const loadingGif = document.getElementById('loading-gif');
@@ -46,6 +51,23 @@ loginForm.addEventListener('submit', function (event) {
             console.log('Login successful');
             const employeeData = await response.json(); // Wait for the JSON data
             console.log('Employee Data:', employeeData); // Log the data
+            let token = null;
+            try {
+                if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
+                const tokenResponse = await fetch("https://vecchiabackend.azurewebsites.net/token", {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({
+                        username: username,
+                        password: password
+                    }),
+                });
+                token = await tokenResponse.text();
+                window.sessionStorage.setItem('token', token);
+            } catch (error) {
+                console.error('Getting Token Error:', error);
+                throw error;
+            }
             window.sessionStorage.setItem('employee', JSON.stringify(employeeData));
             // Successful login, redirect to the specified location
             window.location.href = "html/employee.html";

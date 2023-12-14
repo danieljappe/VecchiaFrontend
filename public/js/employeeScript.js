@@ -1,8 +1,5 @@
 async function fetchMenuItems() {
     const fetchMenuItemsUrl = "https://vecchiabackend.azurewebsites.net/menuItems";
-
-    
-
     
     try {
         const response = await fetch(fetchMenuItemsUrl);
@@ -279,7 +276,6 @@ document.getElementById('editItemForm').addEventListener('submit', function (eve
 
 
 // DELETE
-
 async function deleteItem(itemId) {
     try {
         const deleteUrl = `https://vecchiabackend.azurewebsites.net/menuItems/delete/${itemId}`;
@@ -380,6 +376,7 @@ function openSection(sectionId) {
 
 function logout() {
     window.sessionStorage.removeItem("employee");
+    window.sessionStorage.removeItem("token");
     window.location.href = "../index.html";
 }
 
