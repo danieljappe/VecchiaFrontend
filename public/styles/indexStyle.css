@@ -166,6 +166,14 @@ section {
     opacity: 1; /* Fade in when the element is in view */
     transform: translateX(0); /* Slide in from the left when the element is in view */
   }
+
+  .about-title {
+    padding: 1rem;
+  }
+
+  .about-finish {
+    text-align: center;
+  }
   
 
 
@@ -291,15 +299,6 @@ footer {
 }
 
 
-
-
-
-
-
-
-
-
-
 /* Responsive styles */
 @media only screen and (max-width: 1000px) {
     html, body {
@@ -325,27 +324,6 @@ footer {
         margin-right: 0;
         margin-bottom: 10px;
     }
-
-    .about {
-        width: 95%;
-        min-width: initial;
-    }
-    .commutes-initial-state .description {
-        padding: 0 !important;
-    }
-    .commutes-initial-state .description .heading {
-        color: #111 !important;
-        font-size: 1rem !important;
-        margin: 0;
-    }
-    .commutes-initial-state .description p {
-        color: #5f6368;
-        font-size: 1rem !important;
-        margin: 0;
-      }
-      .commutes-destinations .destination .destination-content {
-        float: left;
-      }
       
 }
 
@@ -408,7 +386,7 @@ footer {
     flex-direction: column;
     align-items: center;
     width: 100%;
-    background-color: beige;
+    background-color: #eee;
   }
   
   .buffet-item {
@@ -418,7 +396,6 @@ footer {
     align-items: center;
     width: 90%;
     margin-bottom: 20px; /* Space between items */
-    border: 1px solid black;
   }
 
   .buffet-underbox {
@@ -426,7 +403,6 @@ footer {
     flex-direction: row;
     justify-content: space-evenly;
     align-items: center;
-    max-height: 110vh;
   }
 
   .buffet-item-description {
@@ -463,9 +439,15 @@ footer {
   
   /* Responsive adjustments */
   @media (max-width: 768px) {
+
+    section {
+      padding: 0;
+    }
+
     .buffet-item,
     .buffet-item.reverse {
       flex-direction: column;
+      width: 100%;
     }
   
     .buffet-image,
@@ -473,6 +455,85 @@ footer {
       width: 100%;
       margin: 0 0 20px 0; /* Adjust margin as necessary */
     }
+
+    .buffet-underbox {
+      flex-direction: column;
+    }
+
+    .buffet-underbox.reverse {
+      flex-direction: column;
+    }
+
+    .buffet-item-description {
+      width: 100%;
+    }
+    
+    .about-box:nth-child(even) {
+      flex-direction: column;
+      margin-right: 0;
+      height: auto;
+    }
+
+    .about-box:nth-child(uneven) {
+      flex-direction: column;
+      margin-right: 0;
+      height: auto;
+    }
+
+    .about-image {
+      width: 100%;
+      height: auto;
+    }
+
+    .about-box {
+      flex-direction: column;
+      align-items: start;
+      height: auto;
+    }
+
+    .about-title {
+      margin: 1rem 0;
+    }
+
+    .about-content {
+      margin: 2rem 0;
+    }
+
+    .about-content p {
+      width: 95%;
+    }
+
+    .about-finish {
+      margin: 2rem 0;
+    }
+
+    .map {
+      margin: 2rem 0;
+    }
+
+    #contact {
+      margin: 2rem 0;
+    }
+
+    .navbar-nav {
+      flex-direction: row;
+      align-items: center;
+    }
+
+    .navbar-nav .nav-item {
+      background-color: #222;
+      width: 100%;
+      text-align: center;
+      margin-right: 0;
+      margin-bottom: 5px;
+      border-radius: 5px;
+    }
+
+    .navbar-nav .nav-item:nth-child(1) {
+      margin-top: 5px;
+    }
+
+
   }
 
   .slide-in {
@@ -508,4 +569,14 @@ footer {
   .buffet-price{
     padding: 1rem 0;
     background-color: #eee;
+  }
+
+  .buffet-booking {
+    border: 1px solid black;
+    padding: 1rem;
+  }
+
+  #buffet-booking-form{
+    display: flex;
+    flex-direction: column;
   }

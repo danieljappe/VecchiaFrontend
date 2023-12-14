@@ -146,8 +146,7 @@
         "Prociutto e Melone" er en klassisk italiensk forret med Parmaskinke og melon. "Melanzane alla Griglia" byder på grillstegte skiver af aubergine. Afslut måltidet med "Tiramisu", en velkendt veneziansk kage med mascarponecreme.</p>
     </div>
     <div class="buffet-underbox">
-      <!-- <img src="https://firebasestorage.googleapis.com/v0/b/vecchia-78929.appspot.com/o/billeder%2FIMG_2257-min.jpg?alt=media&token=4b4a3082-6191-4c93-9394-f013da4f501b" alt="Buffet 1" class="buffet-image"> -->
-      <img src="/public/src/images/IMG_2207.jpg" alt="Buffet 1" class="buffet-image">
+      <img src="https://firebasestorage.googleapis.com/v0/b/vecchia-78929.appspot.com/o/billeder%2FIMG_2257-min.jpg?alt=media&token=4b4a3082-6191-4c93-9394-f013da4f501b" alt="Buffet 1" class="buffet-image">
       <div class="accordion" id="accordion1">
         <h1 class="accordion-title">Buffet 1</h1>
         <div class="accordion-content">
@@ -271,12 +270,56 @@
     </div>
       </div>
     </div>
+
+    <div class="buffet-booking">
+      <h1>Bestil Buffet</h1>
+      <p>Udfyld formularen nedenfor for at bestille en af vores buffeter. Vi vil kontakte dig hurtigst muligt for at bekræfte din bestilling. <br>
+      Har du bestemte ønsker eller allergier? Så ring til os på 49 21 60 00, så finder vi en løsning sammen</p>
+      <form id="buffet-booking-form">
+        <div class="mb-3">
+          <label for="buffetOption" class="form-label">Vælg din type buffet</label>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="buffetOption" id="buffet1" value="Buffet 1" checked>
+            <label class="form-check-label" for="buffet1">
+              Buffet 1
+            </label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="buffetOption" id="buffet2" value="Buffet 2">
+            <label class="form-check-label" for="buffet2">
+              Buffet 2
+            </label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="buffetOption" id="buffet3" value="Buffet 3">
+            <label class="form-check-label" for="buffet3">
+              Buffet 3
+            </label>
+          </div>
+        </div>
+        <div class="mb-3">
+          <label for="name" class="form-label">Fulde Navn</label>
+          <input type="text" class="form-control" id="name" name="name" required>
+        </div>
+        <div class="mb-3">
+          <label for="phone" class="form-label">Telefon</label>
+          <input type="tel" class="form-control" id="phone" name="phone" required>
+        </div>
+        <div class="mb-3">
+          <label for="address" class="form-label">Addresse</label>
+          <input type="text" class="form-control" id="address" name="address" required>
+        </div>
+        <button type="button" id="emailButton" class="btn btn-primary">Send Email</button>
+  
+      </form>
+    </div>
+    
 </section>
 
 
 <section id="about" class="about">
 
-  <h1 style="margin-bottom: 8vh;">Vecchia Maniera - På gammeldags manér</h1>
+  <h1 class="about-title">Vecchia Maniera - På gammeldags manér</h1>
 
   
   <div class="about-box">
@@ -319,7 +362,7 @@
     <img src="https://firebasestorage.googleapis.com/v0/b/vecchia-78929.appspot.com/o/billeder%2FIMG_2239-min.jpg?alt=media&token=232e157f-fce2-4508-b5fb-4b96740c1ed9" alt="" class="about-image">
   </div>
 
-  <p style="text-align: center;"> <strong> Tak fordi du har været en del af vores rejse. Buon Appetito!</strong></p>
+  <p class="about-finish"> <strong> Tak fordi du har været en del af vores rejse. Buon Appetito!</strong></p>
 
 </section>
 
