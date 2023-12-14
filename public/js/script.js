@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-=======
-
->>>>>>> a751ad5846a22974d067195798cb3b02eb8d7302
 const loginEndpoint = "https://vecchiabackend.azurewebsites.net/employees/login";
 //const loginEndpoint = "https://localhost:8080/employees/login";
 const loginForm = document.getElementById('loginForm');

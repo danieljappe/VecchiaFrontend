@@ -192,6 +192,7 @@ document.addEventListener('DOMContentLoaded', function () {
             fetch('https://vecchiabackend.azurewebsites.net/menuItems/create', {
                 method: 'POST',
                 headers: {
+                    'Authorization': `Bearer ${window.sessionStorage.getItem('token')}`,
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify(newItem)
@@ -248,19 +249,25 @@ document.getElementById('editItemForm').addEventListener('submit', function (eve
     };
 
     // Make a PUT request to update the item
+    const token = window.sessionStorage.getItem('token');
+    console.log(token);
+    console.log(editedItem);
     let editUrl = 'https://vecchiabackend.azurewebsites.net/menuItems/update/' + itemId;
+    //let editUrl = `https://localhost:8080/menuItems/update/${itemId}`;
     fetch(editUrl, {
         method: 'PUT',
         headers: {
-            'Content-Type': 'application/json'
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json',
         },
-        body: JSON.stringify(editedItem)
+        body: JSON.stringify(editedItem),
     })
-    .then(response => {
+    .then(async response => {
         console.log('Response:', response);
+        console.log('Response:', response.text());
         return response.json();
     })
-    .then(updatedItem => {
+    .then(async updatedItem => {
         console.log('Item updated:', updatedItem);
 
         // Optionally update the menu items
