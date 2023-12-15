@@ -229,6 +229,12 @@ label {
     padding: 1em;
 }
 
+.employee-settings {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
 
 
 @media screen and (max-width: 600px) {

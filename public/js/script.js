@@ -152,6 +152,8 @@ function handleIntersection(entries, observer) {
   
     window.location.href = mailtoLink;
   });
+
+  // Nav bar expander
   
   window.addEventListener('scroll', function() {
     var navbarToggler = document.querySelector('.navbar-toggler');
@@ -161,4 +163,5 @@ function handleIntersection(entries, observer) {
         navbarToggler.click();
     }
 });
+
 

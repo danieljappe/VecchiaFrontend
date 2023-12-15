@@ -126,7 +126,8 @@ function sortMenuItems() {
 }
 
 
-// Ensure the toggle button is initially hidden
+// DOM
+
 document.addEventListener("DOMContentLoaded", function () {
     var toggleBtn = document.getElementById("toggle-btn");
     toggleBtn.style.opacity = 0;
@@ -152,36 +153,24 @@ document.addEventListener('DOMContentLoaded', function () {
     if (employeeData) {
         populateEmployeeForm(employeeData);
 
-        // Show admin view for admins
-        if (employeeData.isAdmin) {
-            document.getElementById("adminView").style.display = 'block';
-            // Optionally, fetch and display all employees data
-            // fetchAllEmployees();
-        }
-
         // Handle form submission for employee update
         document.getElementById("employeeForm").onsubmit = function(event) {
             event.preventDefault();
             updateEmployee();
+            console.log("EmployeeUpdate clicked!");
         };
+
+
+        // Populate employee form if on the employee section
+        if (document.getElementById("employee")) {
+            populateEmployeeForm(employeeData);
+            console.log("Employee section" + employeeData.name);
+        }
+        
+        // Display user info in the home section
+        userInfo(employeeData);
     }
-
-    // Home section
-
-    const sectionElement = document.querySelector('.employee-info');
-
-    if (employeeData) {
-        sectionElement.innerHTML = `
-        <h1>Logged in as: ${employeeData.firstName} ${employeeData.lastName}</h1>
-        <p><strong>Employee ID:</strong> ${employeeData.employeeID}</p>
-        <p><strong>Is admin:</strong> ${employeeData.admin ? 'Yes' : 'No'}</p>
-        <p><strong>Email:</strong> ${employeeData.email}</p>
-        <p><strong>Phone:</strong> ${employeeData.phone}</p>
-        `;
-    } else {
-        // Handle the case when employeeData is null or undefined
-        sectionElement.innerHTML = `<h1>No employee data found!</h1>`;
-    }
+    
         // Ensure the toggle button is initially hidden
         var toggleBtn = document.getElementById("toggle-btn");
         toggleBtn.style.opacity = 0;
@@ -365,6 +354,7 @@ function openNav() {
     toggleBtn.style.opacity = 0; /* Make the toggle button transparent */
 }
 
+
 function toggleNavVisibility() {
     var sidebar = document.getElementById("sidebar");
     var main = document.getElementById("main");
@@ -398,6 +388,17 @@ function openSection(sectionId) {
         console.log("Fetching menu items...");
         fetchMenuItems();
     }
+
+    if (sectionId === "employee") {
+        const employeeData = JSON.parse(window.sessionStorage.getItem('employee'));
+        if (employeeData.admin === true) {
+            document.getElementById("adminView").style.display = 'block';
+            fetchAllEmployees();
+        }
+    } else {
+        document.getElementById("adminView").style.display = 'none';
+    }
+
 }
 
 function logout() {
@@ -413,9 +414,11 @@ function populateEmployeeForm(data) {
     document.getElementById("email").value = data.email || '';
     document.getElementById("phone").value = data.phone || '';
 
-    // Ensure isAdmin is treated as a boolean
+    
     const isAdminFlag = typeof data.isAdmin === 'boolean' ? data.isAdmin : (data.isAdmin === 'true');
     document.getElementById("isAdmin").checked = isAdminFlag;
+
+    
 }
 
 function updateEmployee() {
@@ -426,14 +429,15 @@ function updateEmployee() {
         phone: document.getElementById("phone").value,
         password: document.getElementById("password").value
     };
+    console.log(updatedData);
 
     const employeeId = document.getElementById("employeeID").value;
     const updateEmployeeUrl = "https://vecchiabackend.azurewebsites.net/employees/update/" + employeeId;
-
+    const token = window.sessionStorage.getItem('token');
     fetch(updateEmployeeUrl, {
-        method: 'PUT', // or 'POST', depending on your backend setup
+        method: 'PUT',
         headers: {
-            'Authorization': 'Bearer ${token}',
+            'Authorization': `Bearer ${token}`,
             'Content-Type': 'application/json'
         },
         body: JSON.stringify(updatedData)
@@ -446,18 +450,80 @@ function updateEmployee() {
     })
     .then(updatedEmployee => {
         console.log('Employee updated:', updatedEmployee);
-        // Handle successful response here, like updating the UI or showing a success message
+        // Update session storage
+        window.sessionStorage.setItem('employee', JSON.stringify(updatedEmployee));
+        
+        document.getElementById('updateSuccessMessage').style.display = 'block';
+        
+        setTimeout(() => {
+            document.getElementById('updateSuccessMessage').style.display = 'none';
+        }, 10000);
     })
     .catch(error => {
         console.error('Error updating employee:', error);
-        // Handle errors here, like showing an error message to the user
+        
     });
 }
 
 
 function fetchAllEmployees() {
-    // AJAX request to get all employees data
-    console.log("Fetching all employees...");
-    // On success, populate #employeeList
+    const allEmployeesUrl = "https://vecchiabackend.azurewebsites.net/employees";
+    const token = window.sessionStorage.getItem('token');
+
+    fetch(allEmployeesUrl, {
+        method: 'GET',
+        headers: {
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json'
+        }
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok ' + response.statusText);
+        }
+        return response.json();
+    })
+    .then(employees => {
+        console.log('All employees:', employees);
+        populateEmployeeList(employees);
+    })
+    .catch(error => {
+        console.error('Error fetching employees:', error);
+        // Handle errors here, like showing an error message
+    });
+}
+
+function populateEmployeeList(employees) {
+    const employeeListDiv = document.getElementById('employeeList');
+    employeeListDiv.innerHTML = ''; // Clear existing content
+
+    employees.forEach(employee => {
+        const employeeDiv = document.createElement('div');
+        employeeDiv.className = 'employee-entry';
+        employeeDiv.innerHTML = `
+            <p>Employee ID: ${employee.employeeID}</p>
+            <p>Name: ${employee.firstName} ${employee.lastName}</p>
+            <p>Email: ${employee.email}</p>
+            <p>Phone: ${employee.phone}</p>
+            <p>Is Admin: ${employee.isAdmin ? 'No' : 'Yes'}</p>
+            <hr>
+        `;
+        employeeListDiv.appendChild(employeeDiv);
+    });
+}
+
+function userInfo(employeeData) {
+    const sectionElement = document.querySelector('.employee-info');
+    if (employeeData) {
+        sectionElement.innerHTML = `
+            <h1>Logged in as: ${employeeData.firstName} ${employeeData.lastName}</h1>
+            <p><strong>Employee ID:</strong> ${employeeData.employeeID}</p>
+            <p><strong>Is admin:</strong> ${employeeData.admin ? 'Yes' : 'No'}</p>
+            <p><strong>Email:</strong> ${employeeData.email}</p>
+            <p><strong>Phone:</strong> ${employeeData.phone}</p>
+        `;
+    } else {
+        sectionElement.innerHTML = `<h1>No employee data found!</h1>`;
+    }
 }
 
