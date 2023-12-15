@@ -77,7 +77,16 @@
     <div class="color-overlay d-flex flex-column justify-content-center align-items-center">
         <h1>Vecchia Maniera</h1>
         <div style="height: 48px;"></div>
-        <a href="tel:+4540384932" class="call-us-title">Ring til os her</a>
+        <script>
+          // JavaScript to check if the user is on a mobile device
+          if (/Mobi|Android/i.test(navigator.userAgent)) {
+            // If on mobile, display "Call Now"
+            document.write('<a href="tel:+4540384932" class="call-us-title" id="call-now">Ring til os her</a>');
+          } else {
+            // If on desktop, display the phone number
+            document.write('<p href="tel:+4540384932" class="call-us-title" id="call-now">49 21 60 00</p>');
+          }
+        </script>
     </div>
 </div>
 
