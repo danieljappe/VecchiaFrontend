@@ -9,5 +9,5 @@ This repository holds the files related to the website of an Italian Restaurant 
 * JQuery
 
 ## Hosting
-The website is being deployed to this address:
+The website is being hosted by Firebase Hosting, on this address:
 > https://vecchia-78929.web.app/
