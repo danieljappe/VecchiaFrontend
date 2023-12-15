@@ -36,7 +36,6 @@ async function fetchMenuItems() {
                     </div>
                 </div>
             `;
-        
             menuList.appendChild(listItem);
         });
 
@@ -66,14 +65,10 @@ async function fetchMenuItems() {
     }
 }
 
-
-
-
 // Function to update the sorting dropdown options
 function updateCategoryDropdown() {
     const categorySortDropdown = document.getElementById('categorySort');
     categorySortDropdown.innerHTML = '<option value="all">All Categories</option>';
-
     allCategories.forEach(category => {
         const option = document.createElement('option');
         option.value = category;
@@ -89,12 +84,7 @@ function sortMenuItems() {
 
     // Set the selected category in the span element
     const selectedCategorySpan = document.getElementById('selectedCategory');
-    
-    if (selectedCategory === 'all') {
-        selectedCategorySpan.textContent = 'All Categories';
-    } else {
-        selectedCategorySpan.textContent = `${selectedCategory}`;
-    }
+    selectedCategorySpan.textContent = (selectedCategory === 'all'? 'All Categories' : `${selectedCategory}`);
 
     const filteredMenuItems = selectedCategory === 'all' ?
         allMenuItems :
@@ -106,34 +96,31 @@ function sortMenuItems() {
 
     filteredMenuItems.forEach(item => {
         const listItem = document.createElement('li');
-            listItem.className = 'menu-item-container'; // Add a class for the container box
+        listItem.className = 'menu-item-container'; // Add a class for the container box
         
-            listItem.innerHTML = `
-                <div class="card">
-                    <!-- <img src="item-image.jpg" class="card-img-top" alt="Item Image"> -->
-                    <div class="card-body">
-                        <h5 class="card-title">${item.name}</h5>
-                        <p class="card-text">${item.description}</p>
-                        <p class="card-text"><strong>Price:</strong> ${item.price.toFixed(2)}kr.-</p>
-                        <p class="card-text"><strong>Category:</strong> ${item.category}</p>
-                        <div class="btn-group" role="group">
-                            <button class="btn btn-warning" onclick="editItem(${item.id}, '${item.name}', '${item.description}', ${item.price}, '${item.category}')">Edit</button>
-                            <button class="btn btn-danger" onclick="deleteItem(${item.id})">Delete</button>
-                        </div>
+        listItem.innerHTML = `
+            <div class="card">
+                 <!-- <img src="item-image.jpg" class="card-img-top" alt="Item Image"> -->
+                <div class="card-body">
+                    <h5 class="card-title">${item.name}</h5>
+                    <p class="card-text">${item.description}</p>
+                    <p class="card-text"><strong>Price:</strong> ${item.price.toFixed(2)}kr.-</p>
+                    <p class="card-text"><strong>Category:</strong> ${item.category}</p>
+                    <div class="btn-group" role="group">
+                        <button class="btn btn-warning" onclick="editItem(${item.id}, '${item.name}', '${item.description}', ${item.price}, '${item.category}')">Edit</button>
+                        <button class="btn btn-danger" onclick="deleteItem(${item.id})">Delete</button>
                     </div>
                 </div>
-            `;
-        
-            menuItemsContainer.appendChild(listItem);
-        });
+            </div>
+        `;
+        menuItemsContainer.appendChild(listItem);
+    });
 }
-
 
 // Ensure the toggle button is initially hidden
 document.addEventListener("DOMContentLoaded", function () {
     var toggleBtn = document.getElementById("toggle-btn");
     toggleBtn.style.opacity = 0;
-    
 });
 
 // Fetch menu items when the page is loaded
@@ -164,59 +151,53 @@ document.addEventListener('DOMContentLoaded', function () {
         // Handle the case when employeeData is null or undefined
         sectionElement.innerHTML = `<h1>No employee data found!</h1>`;
     }
-        // Ensure the toggle button is initially hidden
-        var toggleBtn = document.getElementById("toggle-btn");
-        toggleBtn.style.opacity = 0;
+    // Ensure the toggle button is initially hidden
+    var toggleBtn = document.getElementById("toggle-btn");
+    toggleBtn.style.opacity = 0;
 
-        // Fetch menu items only if the initial section is "menu"
-        if (window.location.hash === "#menu") {
-            fetchMenuItems();
-        }
-
-        // Handle form submission
-        document.getElementById('addItemForm').addEventListener('submit', function (event) {
-            event.preventDefault();
+    // Fetch menu items only if the initial section is "menu"
+    if (window.location.hash === "#menu") fetchMenuItems();
+    
+    // Handle form submission
+    document.getElementById('addItemForm').addEventListener('submit', function (event) {
+        event.preventDefault();
         
-            const itemName = document.getElementById('itemName').value;
-            const itemDescription = document.getElementById('itemDescription').value;
-            const itemPrice = document.getElementById('itemPrice').value;
-            const itemCategory = document.getElementById('itemCategory').value;
+        const itemName = document.getElementById('itemName').value;
+        const itemDescription = document.getElementById('itemDescription').value;
+        const itemPrice = document.getElementById('itemPrice').value;
+        const itemCategory = document.getElementById('itemCategory').value;
+        const newItem = {
+            name: itemName,
+            description: itemDescription,
+            price: parseFloat(itemPrice),
+            category: itemCategory
+        };
 
-            const newItem = {
-                name: itemName,
-                description: itemDescription,
-                price: parseFloat(itemPrice),
-                category: itemCategory
-            };
+        fetch('https://vecchiabackend.azurewebsites.net/menuItems/create', {
+            method: 'POST',
+            headers: {
+                'Authorization': `Bearer ${window.sessionStorage.getItem('token')}`,
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(newItem)
+        }).then(response => response.json()).then(createdItem => {
+            console.log('Item created:', createdItem);
 
-            fetch('https://vecchiabackend.azurewebsites.net/menuItems/create', {
-                method: 'POST',
-                headers: {
-                    'Authorization': `Bearer ${window.sessionStorage.getItem('token')}`,
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(newItem)
-            })
-            .then(response => response.json())
-            .then(createdItem => {
-                console.log('Item created:', createdItem);
+            // update the menu items
+            fetchMenuItems();
 
-                // update the menu items
-                fetchMenuItems();
-
-                // Close the modal
-                $('#addItemModal').modal('hide');
-            })
-            .catch(error => {
-                console.error('Error adding item:', error);
-            });
+            // Close the modal
+            $('#addItemModal').modal('hide');
+        }).catch(error => {
+            console.error('Error adding item:', error);
         });
-
     });
+});
 
 function editItem(itemId, itemName, itemDescription, itemPrice, itemCategory) {
     console.log('Received itemId:', itemId);
     console.log('Received itemName:', itemName);
+    
     // Set values in the edit item modal
     document.getElementById('editItemId').value = itemId;
     document.getElementById('editItemName').value = itemName;
@@ -250,10 +231,7 @@ document.getElementById('editItemForm').addEventListener('submit', function (eve
 
     // Make a PUT request to update the item
     const token = window.sessionStorage.getItem('token');
-    console.log(token);
-    console.log(editedItem);
     let editUrl = 'https://vecchiabackend.azurewebsites.net/menuItems/update/' + itemId;
-    //let editUrl = `http://localhost:8080/menuItems/update/${itemId}`;
 
     fetch(editUrl, {
         method: 'PUT',
@@ -262,12 +240,10 @@ document.getElementById('editItemForm').addEventListener('submit', function (eve
             'Content-Type': 'application/json'
         },
         body: JSON.stringify(editedItem),
-    })
-    .then(async response => {
+    }).then(async response => {
         console.log('Response:', response);
         return await response.json();
-    })
-    .then(async updatedItem => {
+    }).then(async updatedItem => {
         console.log('Item updated:', updatedItem);
 
         // Optionally update the menu items
@@ -275,10 +251,9 @@ document.getElementById('editItemForm').addEventListener('submit', function (eve
 
         // Close the modal
         $('#editItemModal').modal('hide');
-    })
-    .catch(error => {
+    }).catch(error => {
         console.error('Error updating item:', error);
-    })
+    });
 });
 
 
@@ -320,7 +295,6 @@ menuItems.forEach(item => {
         <button class="btn btn-danger">Delete</button>
         <!-- ... (your existing code) -->
     `;
-
     menuItemsContainer.appendChild(card);
 });
 
@@ -380,8 +354,6 @@ function openSection(sectionId) {
         console.log("Fetching menu items...");
         fetchMenuItems();
     }
-
-    
     // Do not close the sidebar here
 }
 
@@ -390,5 +362,3 @@ function logout() {
     window.sessionStorage.removeItem("token");
     window.location.href = "../index.html";
 }
-
-

@@ -1,5 +1,4 @@
 const loginEndpoint = "https://vecchiabackend.azurewebsites.net/employees/login";
-//const loginEndpoint = "https://localhost:8080/employees/login";
 const loginForm = document.getElementById('loginForm');
 const loginButton = document.getElementById('loginButton');
 const loadingGif = document.getElementById('loading-gif');
@@ -40,45 +39,27 @@ loginForm.addEventListener('submit', function (event) {
                 password: password,
             }),
         }),
-    ])
-    .then(async (response) => {
+    ]).then(async (response) => {
         console.log(response);
         if (response.ok) {
             console.log('Login successful');
             const employeeData = await response.json(); // Wait for the JSON data
             console.log('Employee Data:', employeeData); // Log the data
-            let token = null;
-            try {
-                if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
-                const tokenResponse = await fetch("https://vecchiabackend.azurewebsites.net/token", {
-                    method: 'POST',
-                    headers: {'Content-Type': 'application/json'},
-                    body: JSON.stringify({
-                        username: username,
-                        password: password
-                    }),
-                });
-                token = await tokenResponse.text();
-                window.sessionStorage.setItem('token', token);
-            } catch (error) {
-                console.error('Getting Token Error:', error);
-                throw error;
-            }
+            let token = employeeData.token;
             window.sessionStorage.setItem('employee', JSON.stringify(employeeData));
+            window.sessionStorage.setItem('token', token);
             // Successful login, redirect to the specified location
             window.location.href = "html/employee.html";
         } else {
             // Handle login failure (show an error message, etc.)
             console.error('Login failed');
         }
-    })
-    .catch(error => {
+    }).catch(error => {
         // Handle network or other errors
         console.error('Error during login:', error);
         // Display the error message
         errorMessage.style.display = 'block';
-    })
-    .finally(() => {
+    }).finally(() => {
         // Show the button and hide loading GIF
         loginButton.style.display = 'block';
         loadingGif.style.display = 'none';
@@ -86,15 +67,12 @@ loginForm.addEventListener('submit', function (event) {
 });
 
 // Slideshow
-
 document.addEventListener('DOMContentLoaded', function () {
     const slides = document.querySelectorAll('.slide');
     let currentSlide = 0;
 
-    function showSlide(index) {
-        slides.forEach((slide, i) => {
-            slide.classList.toggle('active', i === index);
-        });
+    function showSlide(index) { 
+        slides.forEach((slide, i) => { slide.classList.toggle('active', i === index)});
     }
 
     function nextSlide() {
@@ -104,44 +82,43 @@ document.addEventListener('DOMContentLoaded', function () {
 
     setInterval(nextSlide, 5000); // Change slide every 5 seconds (adjust as needed)
 
-    // Initial display
-    showSlide(currentSlide);
+    showSlide(currentSlide); // Initial display
 });
 
 
 // Function to handle the intersection observer callback
 function handleIntersection(entries, observer) {
     entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('slide-in'); // Add a class to trigger the sliding animation
-        observer.unobserve(entry.target); // Stop observing once the animation is applied
-      }
+        if (entry.isIntersecting) {
+            entry.target.classList.add('slide-in'); // Add a class to trigger the sliding animation
+            observer.unobserve(entry.target); // Stop observing once the animation is applied
+        }
     });
-  }
+}
   
-  // Create an intersection observer for '.about-box' elements
-  const aboutBoxObserver = new IntersectionObserver(handleIntersection, { threshold: 0.2 });
-  document.querySelectorAll('.about-box').forEach(box => {
+// Create an intersection observer for '.about-box' elements
+const aboutBoxObserver = new IntersectionObserver(handleIntersection, { threshold: 0.2 });
+document.querySelectorAll('.about-box').forEach(box => {
     aboutBoxObserver.observe(box);
-  });
+});
   
-    // Create a separate intersection observer for '.buffet-item' elements
-    const buffetObserver = new IntersectionObserver(handleIntersection, { threshold: 0.1 });
+// Create a separate intersection observer for '.buffet-item' elements
+const buffetObserver = new IntersectionObserver(handleIntersection, { threshold: 0.1 });
     document.querySelectorAll('.buffet-item').forEach(item => {
     buffetObserver.observe(item);
-  });
+});
 
-  // Send buffet email
-  document.getElementById('emailButton').addEventListener('click', function() {
+// Send buffet email
+document.getElementById('emailButton').addEventListener('click', function() {
     var buffetOption = document.querySelector('input[name="buffetOption"]:checked').value;
     var name = document.getElementById('name').value;
+    
     // TODO: Change email to vecchia
     var email = "danieljappe@gmail.com"
     var phone = document.getElementById('phone').value;
     var address = document.getElementById('address').value;
   
-    var emailBody = 
-      'Buffet Option: ' + encodeURIComponent(buffetOption) + '%0D%0A' +
+    var emailBody = 'Buffet Option: ' + encodeURIComponent(buffetOption) + '%0D%0A' +
       'Name: ' + encodeURIComponent(name) + '%0D%0A' +
       'Phone Number: ' + encodeURIComponent(phone) + '%0D%0A' +
       'Address: ' + encodeURIComponent(address);
@@ -151,14 +128,10 @@ function handleIntersection(entries, observer) {
                      '&body=' + emailBody;
   
     window.location.href = mailtoLink;
-  });
+});
   
-  window.addEventListener('scroll', function() {
+window.addEventListener('scroll', function() {
     var navbarToggler = document.querySelector('.navbar-toggler');
     var isNavbarExpanded = navbarToggler.getAttribute('aria-expanded') === 'true';
-
-    if (isNavbarExpanded) {
-        navbarToggler.click();
-    }
+    if (isNavbarExpanded) navbarToggler.click();
 });
-
