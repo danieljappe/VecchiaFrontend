@@ -17,7 +17,7 @@
         <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
         <a href="#" onclick="openSection('home')">Home</a>
         <a href="#" onclick="openSection('menu')">Menu</a>
-        <a href="#" onclick="openSection('catering-orders')">Catering Orders</a>
+        <a href="#" onclick="openSection('employee')">Employee Settings</a>
         <a href="#" onclick="openSection('logout')">Logout</a>
     </div>
 
@@ -64,16 +64,52 @@
 </div>
 
 
-<!-- Catering Orders Section -->
-<div class="content-container">
-    <section id="catering-orders" style="display:none;">
-        <h2>Catering Orders</h2>
-        <!-- Add your functionality for catering orders here -->
-        <!-- Example: -->
-        <p>No catering orders currently.</p>
+<!-- Employee Settings Section -->
+<div class="container mt-4">
+  <section id="employee" style="display:none;">
+      <h2>Employee Settings</h2>
 
-        <p>Evt calender her (FullCalendar.js)</p>
-    </section>
+      <!-- Employee Edit Form -->
+      <form id="employeeForm" class="mt-3">
+          <div class="form-group">
+              <label for="employeeID">Employee ID:</label>
+              <input type="text" id="employeeID" name="employeeID" class="form-control" readonly>
+          </div>
+          <div class="form-group">
+              <label for="isAdmin">Is Admin:</label>
+              <input type="checkbox" id="isAdmin" name="isAdmin" disabled>
+          </div>
+          <div class="form-group">
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" class="form-control">
+        </div>
+          <div class="form-group">
+              <label for="firstName">First Name:</label>
+              <input type="text" id="firstName" name="firstName" class="form-control">
+          </div>
+          <div class="form-group">
+              <label for="lastName">Last Name:</label>
+              <input type="text" id="lastName" name="lastName" class="form-control">
+          </div>
+          <div class="form-group">
+              <label for="email">Email:</label>
+              <input type="email" id="email" name="email" class="form-control">
+          </div>
+          <div class="form-group">
+              <label for="phone">Phone:</label>
+              <input type="tel" id="phone" name="phone" class="form-control">
+          </div>
+          <button type="submit" class="btn btn-primary">Update Employee</button>
+      </form>
+  </section>
+
+  <!-- Admin View Section -->
+  <section id="adminView" style="display:none;">
+      <h2>Admin Employee Overview</h2>
+      <div id="employeeList" class="mt-3">
+          <!-- Employee list will be populated here -->
+      </div>
+  </section>
 </div>
 
 

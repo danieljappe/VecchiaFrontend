@@ -205,7 +205,6 @@ footer {
 #loading-gif {
     height: 10vh;
     display: none;
-
 }
 
 .masthead {
@@ -574,6 +573,7 @@ footer {
   .buffet-booking {
     border: 1px solid black;
     padding: 1rem;
+    border-radius: 10px;
   }
 
   #buffet-booking-form{

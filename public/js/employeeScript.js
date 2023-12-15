@@ -36,6 +36,7 @@ async function fetchMenuItems() {
                     </div>
                 </div>
             `;
+        
             menuList.appendChild(listItem);
         });
 
@@ -69,6 +70,7 @@ async function fetchMenuItems() {
 function updateCategoryDropdown() {
     const categorySortDropdown = document.getElementById('categorySort');
     categorySortDropdown.innerHTML = '<option value="all">All Categories</option>';
+
     allCategories.forEach(category => {
         const option = document.createElement('option');
         option.value = category;
@@ -84,7 +86,12 @@ function sortMenuItems() {
 
     // Set the selected category in the span element
     const selectedCategorySpan = document.getElementById('selectedCategory');
-    selectedCategorySpan.textContent = (selectedCategory === 'all'? 'All Categories' : `${selectedCategory}`);
+    
+    if (selectedCategory === 'all') {
+        selectedCategorySpan.textContent = 'All Categories';
+    } else {
+        selectedCategorySpan.textContent = `${selectedCategory}`;
+    }
 
     const filteredMenuItems = selectedCategory === 'all' ?
         allMenuItems :
@@ -96,31 +103,34 @@ function sortMenuItems() {
 
     filteredMenuItems.forEach(item => {
         const listItem = document.createElement('li');
-        listItem.className = 'menu-item-container'; // Add a class for the container box
+            listItem.className = 'menu-item-container'; // Add a class for the container box
         
-        listItem.innerHTML = `
-            <div class="card">
-                 <!-- <img src="item-image.jpg" class="card-img-top" alt="Item Image"> -->
-                <div class="card-body">
-                    <h5 class="card-title">${item.name}</h5>
-                    <p class="card-text">${item.description}</p>
-                    <p class="card-text"><strong>Price:</strong> ${item.price.toFixed(2)}kr.-</p>
-                    <p class="card-text"><strong>Category:</strong> ${item.category}</p>
-                    <div class="btn-group" role="group">
-                        <button class="btn btn-warning" onclick="editItem(${item.id}, '${item.name}', '${item.description}', ${item.price}, '${item.category}')">Edit</button>
-                        <button class="btn btn-danger" onclick="deleteItem(${item.id})">Delete</button>
+            listItem.innerHTML = `
+                <div class="card">
+                    <!-- <img src="item-image.jpg" class="card-img-top" alt="Item Image"> -->
+                    <div class="card-body">
+                        <h5 class="card-title">${item.name}</h5>
+                        <p class="card-text">${item.description}</p>
+                        <p class="card-text"><strong>Price:</strong> ${item.price.toFixed(2)}kr.-</p>
+                        <p class="card-text"><strong>Category:</strong> ${item.category}</p>
+                        <div class="btn-group" role="group">
+                            <button class="btn btn-warning" onclick="editItem(${item.id}, '${item.name}', '${item.description}', ${item.price}, '${item.category}')">Edit</button>
+                            <button class="btn btn-danger" onclick="deleteItem(${item.id})">Delete</button>
+                        </div>
                     </div>
                 </div>
-            </div>
-        `;
-        menuItemsContainer.appendChild(listItem);
-    });
+            `;
+        
+            menuItemsContainer.appendChild(listItem);
+        });
 }
+
 
 // Ensure the toggle button is initially hidden
 document.addEventListener("DOMContentLoaded", function () {
     var toggleBtn = document.getElementById("toggle-btn");
     toggleBtn.style.opacity = 0;
+    
 });
 
 // Fetch menu items when the page is loaded
@@ -137,6 +147,27 @@ document.addEventListener('DOMContentLoaded', function () {
     const employeeData = JSON.parse(window.sessionStorage.getItem('employee'));
     console.log('Employee Data in employee.html:', employeeData);
 
+
+    // Employee section
+    if (employeeData) {
+        populateEmployeeForm(employeeData);
+
+        // Show admin view for admins
+        if (employeeData.isAdmin) {
+            document.getElementById("adminView").style.display = 'block';
+            // Optionally, fetch and display all employees data
+            // fetchAllEmployees();
+        }
+
+        // Handle form submission for employee update
+        document.getElementById("employeeForm").onsubmit = function(event) {
+            event.preventDefault();
+            updateEmployee();
+        };
+    }
+
+    // Home section
+
     const sectionElement = document.querySelector('.employee-info');
 
     if (employeeData) {
@@ -151,53 +182,59 @@ document.addEventListener('DOMContentLoaded', function () {
         // Handle the case when employeeData is null or undefined
         sectionElement.innerHTML = `<h1>No employee data found!</h1>`;
     }
-    // Ensure the toggle button is initially hidden
-    var toggleBtn = document.getElementById("toggle-btn");
-    toggleBtn.style.opacity = 0;
+        // Ensure the toggle button is initially hidden
+        var toggleBtn = document.getElementById("toggle-btn");
+        toggleBtn.style.opacity = 0;
 
-    // Fetch menu items only if the initial section is "menu"
-    if (window.location.hash === "#menu") fetchMenuItems();
-    
-    // Handle form submission
-    document.getElementById('addItemForm').addEventListener('submit', function (event) {
-        event.preventDefault();
-        
-        const itemName = document.getElementById('itemName').value;
-        const itemDescription = document.getElementById('itemDescription').value;
-        const itemPrice = document.getElementById('itemPrice').value;
-        const itemCategory = document.getElementById('itemCategory').value;
-        const newItem = {
-            name: itemName,
-            description: itemDescription,
-            price: parseFloat(itemPrice),
-            category: itemCategory
-        };
-
-        fetch('https://vecchiabackend.azurewebsites.net/menuItems/create', {
-            method: 'POST',
-            headers: {
-                'Authorization': `Bearer ${window.sessionStorage.getItem('token')}`,
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(newItem)
-        }).then(response => response.json()).then(createdItem => {
-            console.log('Item created:', createdItem);
-
-            // update the menu items
+        // Fetch menu items only if the initial section is "menu"
+        if (window.location.hash === "#menu") {
             fetchMenuItems();
+        }
 
-            // Close the modal
-            $('#addItemModal').modal('hide');
-        }).catch(error => {
-            console.error('Error adding item:', error);
+        // Handle form submission
+        document.getElementById('addItemForm').addEventListener('submit', function (event) {
+            event.preventDefault();
+        
+            const itemName = document.getElementById('itemName').value;
+            const itemDescription = document.getElementById('itemDescription').value;
+            const itemPrice = document.getElementById('itemPrice').value;
+            const itemCategory = document.getElementById('itemCategory').value;
+
+            const newItem = {
+                name: itemName,
+                description: itemDescription,
+                price: parseFloat(itemPrice),
+                category: itemCategory
+            };
+
+            fetch('https://vecchiabackend.azurewebsites.net/menuItems/create', {
+                method: 'POST',
+                headers: {
+                    'Authorization': `Bearer ${window.sessionStorage.getItem('token')}`,
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(newItem)
+            })
+            .then(response => response.json())
+            .then(createdItem => {
+                console.log('Item created:', createdItem);
+
+                // update the menu items
+                fetchMenuItems();
+
+                // Close the modal
+                $('#addItemModal').modal('hide');
+            })
+            .catch(error => {
+                console.error('Error adding item:', error);
+            });
         });
+
     });
-});
 
 function editItem(itemId, itemName, itemDescription, itemPrice, itemCategory) {
     console.log('Received itemId:', itemId);
     console.log('Received itemName:', itemName);
-    
     // Set values in the edit item modal
     document.getElementById('editItemId').value = itemId;
     document.getElementById('editItemName').value = itemName;
@@ -231,7 +268,10 @@ document.getElementById('editItemForm').addEventListener('submit', function (eve
 
     // Make a PUT request to update the item
     const token = window.sessionStorage.getItem('token');
+    console.log(token);
+    console.log(editedItem);
     let editUrl = 'https://vecchiabackend.azurewebsites.net/menuItems/update/' + itemId;
+    //let editUrl = `http://localhost:8080/menuItems/update/${itemId}`;
 
     fetch(editUrl, {
         method: 'PUT',
@@ -240,10 +280,12 @@ document.getElementById('editItemForm').addEventListener('submit', function (eve
             'Content-Type': 'application/json'
         },
         body: JSON.stringify(editedItem),
-    }).then(async response => {
+    })
+    .then(async response => {
         console.log('Response:', response);
         return await response.json();
-    }).then(async updatedItem => {
+    })
+    .then(async updatedItem => {
         console.log('Item updated:', updatedItem);
 
         // Optionally update the menu items
@@ -251,9 +293,10 @@ document.getElementById('editItemForm').addEventListener('submit', function (eve
 
         // Close the modal
         $('#editItemModal').modal('hide');
-    }).catch(error => {
+    })
+    .catch(error => {
         console.error('Error updating item:', error);
-    });
+    })
 });
 
 
@@ -295,6 +338,7 @@ menuItems.forEach(item => {
         <button class="btn btn-danger">Delete</button>
         <!-- ... (your existing code) -->
     `;
+
     menuItemsContainer.appendChild(card);
 });
 
@@ -338,7 +382,7 @@ function toggleNavVisibility() {
 }
 
 function openSection(sectionId) {
-    var sections = ["home", "menu", "catering-orders", "logout"];
+    var sections = ["home", "menu", "employee", "logout"];
     var sidebar = document.getElementById("sidebar");
 
     // Hide all sections
@@ -354,7 +398,6 @@ function openSection(sectionId) {
         console.log("Fetching menu items...");
         fetchMenuItems();
     }
-    // Do not close the sidebar here
 }
 
 function logout() {
@@ -362,3 +405,59 @@ function logout() {
     window.sessionStorage.removeItem("token");
     window.location.href = "../index.html";
 }
+
+function populateEmployeeForm(data) {
+    document.getElementById("employeeID").value = data.employeeID;
+    document.getElementById("firstName").value = data.firstName || '';
+    document.getElementById("lastName").value = data.lastName || '';
+    document.getElementById("email").value = data.email || '';
+    document.getElementById("phone").value = data.phone || '';
+
+    // Ensure isAdmin is treated as a boolean
+    const isAdminFlag = typeof data.isAdmin === 'boolean' ? data.isAdmin : (data.isAdmin === 'true');
+    document.getElementById("isAdmin").checked = isAdminFlag;
+}
+
+function updateEmployee() {
+    let updatedData = {
+        firstName: document.getElementById("firstName").value,
+        lastName: document.getElementById("lastName").value,
+        email: document.getElementById("email").value,
+        phone: document.getElementById("phone").value,
+        password: document.getElementById("password").value
+    };
+
+    const employeeId = document.getElementById("employeeID").value;
+    const updateEmployeeUrl = "https://vecchiabackend.azurewebsites.net/employees/update/" + employeeId;
+
+    fetch(updateEmployeeUrl, {
+        method: 'PUT', // or 'POST', depending on your backend setup
+        headers: {
+            'Authorization': 'Bearer ${token}',
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(updatedData)
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok ' + response.statusText);
+        }
+        return response.json();
+    })
+    .then(updatedEmployee => {
+        console.log('Employee updated:', updatedEmployee);
+        // Handle successful response here, like updating the UI or showing a success message
+    })
+    .catch(error => {
+        console.error('Error updating employee:', error);
+        // Handle errors here, like showing an error message to the user
+    });
+}
+
+
+function fetchAllEmployees() {
+    // AJAX request to get all employees data
+    console.log("Fetching all employees...");
+    // On success, populate #employeeList
+}
+
