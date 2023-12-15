@@ -47,23 +47,8 @@ loginForm.addEventListener('submit', function (event) {
             console.log('Login successful');
             const employeeData = await response.json(); // Wait for the JSON data
             console.log('Employee Data:', employeeData); // Log the data
-            let token = null;
-            try {
-                if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
-                const tokenResponse = await fetch("https://vecchiabackend.azurewebsites.net/token", {
-                    method: 'POST',
-                    headers: {'Content-Type': 'application/json'},
-                    body: JSON.stringify({
-                        username: username,
-                        password: password
-                    }),
-                });
-                token = await tokenResponse.text();
-                window.sessionStorage.setItem('token', token);
-            } catch (error) {
-                console.error('Getting Token Error:', error);
-                throw error;
-            }
+            let token = employeeData.token;
+            window.sessionStorage.setItem('token', token);
             window.sessionStorage.setItem('employee', JSON.stringify(employeeData));
             // Successful login, redirect to the specified location
             window.location.href = "html/employee.html";
