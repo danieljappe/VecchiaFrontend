@@ -61,9 +61,8 @@ desktopLink {
     display: flex;
     font-size: 18px;
     font-weight: 500;
-    height: 18px;
-    margin-bottom: 4vh;
-    margin-top: 0px;
+    margin: 0px;
+    text-align: start;
 }
 .menu-item-card-description {
     display: flex;
@@ -72,6 +71,7 @@ desktopLink {
     color: rgba(0, 0, 0, 0.7);
     height: 15px;
     margin: 0px;
+    text-align: start;
 }
 
 .menu-item-card-price {
@@ -79,6 +79,7 @@ desktopLink {
     font-weight: 500;
     height: 18px;
     margin-bottom: 0px;
+    width: 80px;
 }
 
 #menu {
